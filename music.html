@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rachmat Maulana Saleh</title>
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="assets/android-chrome-192x192.png">
+    <link rel="icon" type="image/png" sizes="512x512" href="assets/android-chrome-512x512.png">
+    <link rel="shortcut icon" href="assets/favicon.ico">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #f5f5f5;
+            color-scheme: light dark;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            body {
+                background: #121212;
+            }
+        }
+
+        .radio-bar {
+            border-top: 1px solid #E0E0E0;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 56px;
+            background: #121212;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0 1rem;
+            gap: 0.75rem;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+            z-index: 1000;
+        }
+
+        .radio-bar__btn {
+            width: 40px;
+            height: 40px;
+            border: none;
+            background: #FFEB3B;
+            color: #121212;
+            font-size: 1rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.15s, background 0.15s;
+            flex-shrink: 0;
+            padding-bottom: 2px;
+            padding-left: 2px;
+        }
+
+        .radio-bar__btn:hover {
+            background: #FFF176;
+            transform: scale(1.08);
+        }
+
+        .radio-bar__btn:active {
+            transform: scale(0.95);
+        }
+
+        .radio-bar__info {
+            display: flex;
+            flex-direction: column;
+            min-width: 0;
+        }
+
+        .radio-bar__label {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: #f0f0f0;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .radio-bar__status {
+            font-size: 0.7rem;
+            color: #a0a0a0;
+        }
+
+        .radio-bar__status.live {
+            color: #FFEB3B;
+            font-weight: 600;
+        }
+
+        .radio-bar__dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #FFEB3B;
+            animation: blink 1s ease-in-out infinite;
+            display: none;
+            flex-shrink: 0;
+        }
+
+        .radio-bar__dot.active {
+            display: block;
+        }
+
+        @keyframes blink {
+
+            0%,
+            100% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: 0.3;
+            }
+        }
+
+        .radio-bar__next {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            border: none;
+            background: rgba(255, 255, 255, 0.1);
+            color: #f0f0f0;
+            font-size: 1rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.15s, background 0.15s;
+            flex-shrink: 0;
+        }
+
+        .radio-bar__next:hover {
+            background: rgba(255, 235, 59, 0.2);
+            transform: scale(1.08);
+        }
+
+        .radio-bar__next:active {
+            transform: scale(0.95);
+        }
+
+        .radio-bar__volume {
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+
+        .radio-bar__volume-icon {
+            font-size: 0.9rem;
+            color: #f0f0f0;
+        }
+
+        .radio-bar__volume input[type="range"] {
+            width: 80px;
+            height: 4px;
+            accent-color: #FFEB3B;
+            cursor: pointer;
+        }
+
+        @media (max-width: 480px) {
+            .radio-bar__volume input[type="range"] {
+                width: 50px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="radio-bar">
+        <button class="radio-bar__btn" id="playBtn" aria-label="Play">&#9654;</button>
+        <button class="radio-bar__next" id="nextBtn" aria-label="Next station">&#9197;</button>
+        <span class="radio-bar__dot" id="liveDot"></span>
+        <div class="radio-bar__info">
+            <span class="radio-bar__label" id="stationLabel">Mustang 88 FM Jakarta</span>
+            <span class="radio-bar__status" id="status">Tap to play</span>
+        </div>
+        <div class="radio-bar__volume">
+            <span class="radio-bar__volume-icon">🔊</span>
+            <input type="range" id="volume" min="0" max="100" value="80" aria-label="Volume">
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+    <script>
+        const stations = [
+            {
+                name: 'Mustang 88 FM Jakarta',
+                freq: '88.0 FM',
+                url: 'https://wz.mari.co.id:1936/web_mustangfm/_definst_/mustangfm/playlist.m3u8',
+                type: 'hls'
+            },
+            {
+                name: 'Hard Rock FM 87.6 Jakarta',
+                freq: '87.6 FM',
+                url: 'https://n05.radiojar.com/7csmg90fuqruv.mp3?1673348819=&rj-ttl=5&rj-tok=AAABnsa3w0QACLuvpagEX4YLug',
+                type: 'mp3'
+            },
+            {
+                name: 'Ardan Radio 105.9 FM Bandung',
+                freq: '105.9 FM',
+                url: 'https://stream.ardangroup.fm:8443/ardan/_definst_/adaptive.smil/playlist.m3u8',
+                type: 'hls'
+            },
+            {
+                name: 'OZ Radio 103.1 FM Bandung',
+                freq: '103.1 FM',
+                url: 'https://streaming.ozradio.id:8443/ozbandung',
+                type: 'mp3'
+            }
+        ];
+
+        let currentStation = 0;
+        let hls = null;
+        let isPlaying = false;
+
+        const audio = document.createElement('audio');
+        const playBtn = document.getElementById('playBtn');
+        const nextBtn = document.getElementById('nextBtn');
+        const status = document.getElementById('status');
+        const liveDot = document.getElementById('liveDot');
+        const stationLabel = document.getElementById('stationLabel');
+        const volumeSlider = document.getElementById('volume');
+
+        function destroyHls() {
+            if (hls) {
+                hls.destroy();
+                hls = null;
+            }
+            audio.removeAttribute('src');
+            audio.load();
+        }
+
+        function loadStation(index) {
+            destroyHls();
+            const station = stations[index];
+            stationLabel.textContent = station.name;
+
+            if (station.type === 'hls') {
+                if (Hls.isSupported()) {
+                    hls = new Hls();
+                    hls.loadSource(station.url);
+                    hls.attachMedia(audio);
+                    hls.on(Hls.Events.ERROR, (event, data) => {
+                        if (data.fatal) {
+                            setUiStopped();
+                            status.textContent = 'Stream error';
+                        }
+                    });
+                } else if (audio.canPlayType('application/vnd.apple.mpegurl')) {
+                    audio.src = station.url;
+                }
+            } else {
+                audio.src = station.url;
+            }
+        }
+
+        function nextStation() {
+            const wasPlaying = isPlaying;
+            if (isPlaying) {
+                audio.pause();
+            }
+            currentStation = (currentStation + 1) % stations.length;
+            loadStation(currentStation);
+
+            if (wasPlaying) {
+                play();
+            } else {
+                setUiStopped();
+                status.textContent = 'Tap to play';
+            }
+        }
+
+        function setUiPlaying() {
+            isPlaying = true;
+            playBtn.innerHTML = '&#9646;&#9646;';
+            status.textContent = '● LIVE';
+            status.classList.add('live');
+            liveDot.classList.add('active');
+        }
+
+        function setUiStopped() {
+            isPlaying = false;
+            playBtn.innerHTML = '&#9654;';
+            status.classList.remove('live');
+            liveDot.classList.remove('active');
+        }
+
+        function play() {
+            audio.play().then(() => {
+                setUiPlaying();
+            }).catch(() => {
+                status.textContent = 'Unable to play';
+                setUiStopped();
+            });
+        }
+
+        function pause() {
+            audio.pause();
+            setUiStopped();
+            status.textContent = 'Paused';
+        }
+
+        playBtn.addEventListener('click', () => {
+            isPlaying ? pause() : play();
+        });
+
+        nextBtn.addEventListener('click', () => {
+            nextStation();
+        });
+
+        volumeSlider.addEventListener('input', (e) => {
+            audio.volume = e.target.value / 100;
+        });
+
+        audio.volume = 0.8;
+        loadStation(currentStation);
+    </script>
+</body>
+
+</html>
