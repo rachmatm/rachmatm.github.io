@@ -17,16 +17,18 @@
 
         html,
         body {
-            height: 100%;
-            width: 100%;
+            margin: 0;
+            padding: 0;
         }
 
         body {
             display: flex;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
             background-color: #fff;
             color-scheme: light dark;
+            gap: 2rem;
         }
 
         @media (prefers-color-scheme: dark) {
@@ -194,7 +196,12 @@
         <!-- Comic bubble (resume download) -->
         <a class="bubble bubble--highlight bubble-download-resume" href="rachmat-journey-20260529.pdf" download>Download
             my latest resume</a>
+            
+    </div>
 
+    <div class="photo-wrapper">
+        <img src="family.jpeg" alt="Family">
+        <br>
     </div>
 </body>
 
