@@ -76,7 +76,7 @@
         .radio-bar__info {
             display: flex;
             flex-direction: column;
-            min-width: 0;
+            min-width: 160px;
         }
 
         .radio-bar__label {
@@ -194,12 +194,6 @@
     <script>
         const stations = [
             {
-                name: 'Mustang 88 FM Jakarta',
-                freq: '88.0 FM',
-                url: 'https://wz.mari.co.id:1936/web_mustangfm/_definst_/mustangfm/playlist.m3u8',
-                type: 'hls'
-            },
-            {
                 name: 'Hard Rock FM 87.6 Jakarta',
                 freq: '87.6 FM',
                 url: 'https://n05.radiojar.com/7csmg90fuqruv.mp3?1673348819=&rj-ttl=5&rj-tok=AAABnsa3w0QACLuvpagEX4YLug',
@@ -216,7 +210,37 @@
                 freq: '103.1 FM',
                 url: 'https://streaming.ozradio.id:8443/ozbandung',
                 type: 'mp3'
-            }
+            },
+            {
+                name: 'Prambors FM 102.2 Jakarta',
+                freq: '102.2 FM',
+                url: 'https://stream.rcs.revma.com/h77wwp48kxcwv?city=Singapore',
+                type: 'mp3'
+            },
+            {
+                name: 'iRadio 89.6 FM Jakarta',
+                freq: '',
+                url: 'https://stream.radiojar.com/4ywdgup3bnzuv',
+                type: 'mp3'
+            },
+            {
+                name: 'Gen 987 FM Jakarta',
+                freq: '',
+                url: 'https://wz.mari.co.id:1936/web_genfm/genfm/playlist.m3u8',
+                type: 'hls'
+            },
+            {
+                name: 'Sonora FM 92 Jakarta',
+                freq: '92.0 FM',
+                url: 'https://sonora-radio.arenastreaming.com/8130/stream',
+                type: 'mp3'
+            },
+            {
+                name: 'Mustang 88 FM Jakarta',
+                freq: '88.0 FM',
+                url: 'https://wz.mari.co.id:1936/web_mustangfm/_definst_/mustangfm/playlist.m3u8',
+                type: 'hls'
+            },
         ];
 
         let currentStation = 0;
@@ -286,6 +310,8 @@
             status.textContent = '● LIVE';
             status.classList.add('live');
             liveDot.classList.add('active');
+            document.title = stations[currentStation].name;
+            try { if (window.parent !== window) window.parent.document.title = stations[currentStation].name; } catch(e) {}
         }
 
         function setUiStopped() {
@@ -293,6 +319,8 @@
             playBtn.innerHTML = '&#9654;';
             status.classList.remove('live');
             liveDot.classList.remove('active');
+            document.title = 'Rachmat Maulana Saleh';
+            try { if (window.parent !== window) window.parent.document.title = 'Rachmat Maulana Saleh'; } catch(e) {}
         }
 
         function play() {
