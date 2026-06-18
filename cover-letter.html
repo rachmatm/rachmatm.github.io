@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cover Letter - Rachmat Maulana Saleh</title>
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="assets/android-chrome-192x192.png">
+    <link rel="icon" type="image/png" sizes="512x512" href="assets/android-chrome-512x512.png">
+    <link rel="shortcut icon" href="assets/favicon.ico">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@700&display=swap">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: #f4f4f5;
+            color: #1a1a1a;
+            line-height: 1.7;
+            padding: 2rem 1rem;
+        }
+
+        .letter {
+            max-width: 720px;
+            margin: 0 auto;
+            background: #fff;
+            border-radius: 2px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08), 0 8px 30px rgba(0, 0, 0, 0.05);
+            padding: 4rem;
+            position: relative;
+        }
+
+        .letter::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #1a1a1a 0%, #444 100%);
+        }
+
+        .letter__header {
+            margin-bottom: 2.5rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid #e5e5e5;
+        }
+
+        .letter__name {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #1a1a1a;
+            margin-bottom: 0.25rem;
+        }
+
+        .letter__title {
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: #666;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        .letter__date {
+            margin-bottom: 2rem;
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        .letter__greeting {
+            font-size: 1.05rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            color: #1a1a1a;
+        }
+
+        .letter__body p {
+            margin-bottom: 1.25rem;
+            font-size: 0.95rem;
+            color: #333;
+        }
+
+        .letter__body p:last-child {
+            margin-bottom: 0;
+        }
+
+        .letter__body a {
+            color: #1a1a1a;
+            font-weight: 500;
+            text-decoration: underline;
+            text-underline-offset: 3px;
+        }
+
+        .letter__body a:hover {
+            color: #555;
+        }
+
+        .letter__closing {
+            margin-top: 2rem;
+            font-size: 0.95rem;
+            color: #333;
+        }
+
+        .letter__closing p {
+            margin-bottom: 0.25rem;
+        }
+
+        .letter__signature {
+            margin-top: 1.5rem;
+            font-family: 'Playfair Display', serif;
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #1a1a1a;
+        }
+
+        .highlight {
+            background: linear-gradient(180deg, transparent 60%, rgba(255, 235, 59, 0.3) 60%);
+            padding: 0 2px;
+        }
+
+        .download-btn {
+            display: block;
+            max-width: 720px;
+            margin: 0 auto 1rem;
+            padding: 0.75rem 1.5rem;
+            background: #FFEB3B;
+            color: #1a1a1a;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.9rem;
+            font-weight: 600;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            text-align: center;
+            transition: background 0.15s, transform 0.15s;
+        }
+
+        .download-btn:hover {
+            background: #FDD835;
+            transform: translateY(-1px);
+        }
+
+        .download-btn:active {
+            transform: translateY(0);
+        }
+
+        @media print {
+            .download-btn {
+                display: none;
+            }
+
+            body {
+                background: #fff;
+                padding: 0;
+            }
+
+            .letter {
+                box-shadow: none;
+                padding: 2rem;
+                border-radius: 0;
+            }
+
+            .letter::before {
+                display: none;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .letter {
+                padding: 2rem 1.5rem;
+            }
+
+            .letter__name {
+                font-size: 1.4rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <button class="download-btn" id="downloadBtn">⬇ Download PDF</button>
+    <div class="letter" id="letter">
+        <div class="letter__header">
+            <div class="letter__name">Rachmat Maulana Saleh</div>
+            <div class="letter__title">Full-Stack Engineer</div>
+        </div>
+
+        <div class="letter__date" id="date"></div>
+
+        <div class="letter__greeting" id="greeting">Dear Hiring Manager,</div>
+
+        <div class="letter__body">
+            <p>I am writing to express my interest in the <span class="highlight" id="roleInline">Software Engineer</span> position. With 15 years of experience as a Full-Stack Engineer, I bring deep expertise in backend architecture, database design, query optimization, indexing strategies, system integration, and performance tuning. I also have extensive frontend experience building responsive, user-focused applications using modern web technologies.</p>
+
+            <p>Having worked across the entire technology stack, I am able to bridge technical implementation, user experience, and business requirements effectively. I am also well-positioned to thrive in the AI-assisted engineering era, leveraging AI-powered tools to accelerate development, enhance quality, and solve complex problems more efficiently. Additionally, I bring hands-on DevOps experience managing cloud infrastructure, CI/CD pipelines, deployment automation, monitoring, and system reliability.</p>
+
+            <p>I would welcome the opportunity to discuss how my background aligns with the needs of <span class="highlight" id="companyInline">your company</span> for the <span id="roleInline2">Software Engineer</span> role. My resume is available here: <a href="https://rachmatm.github.io" target="_blank" rel="noopener">rachmatm.github.io</a></p>
+
+            <p>Thank you for your time and consideration.</p>
+        </div>
+
+        <div class="letter__closing">
+            <p>Best regards,</p>
+        </div>
+
+        <div class="letter__signature">Rachmat Maulana Saleh</div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.2/html2pdf.bundle.min.js"></script>
+    <script>
+        const params = new URLSearchParams(window.location.search);
+        const recipientName = params.get('recipient_name') || '';
+        const roleTitle = params.get('role_title') || '';
+        const companyName = params.get('company_name') || '';
+
+        const defaults = {
+            recipient_name: 'Hiring Manager',
+            role_title: 'Software Engineer',
+            company_name: 'your company'
+        };
+
+        if (!recipientName || !roleTitle || !companyName) {
+            const newParams = new URLSearchParams();
+            newParams.set('recipient_name', recipientName || defaults.recipient_name);
+            newParams.set('role_title', roleTitle || defaults.role_title);
+            newParams.set('company_name', companyName || defaults.company_name);
+            window.location.replace(window.location.pathname + '?' + newParams.toString());
+        } else {
+            document.getElementById('greeting').textContent = `Dear ${recipientName},`;
+            document.getElementById('roleInline').textContent = roleTitle;
+            document.getElementById('roleInline2').textContent = roleTitle;
+            document.getElementById('companyInline').textContent = companyName;
+
+            const now = new Date();
+            const options = { year: 'numeric', month: 'long', day: 'numeric' };
+            document.getElementById('date').textContent = now.toLocaleDateString('en-US', options);
+
+            document.title = `Cover Letter - ${roleTitle} at ${companyName}`;
+
+            document.getElementById('downloadBtn').addEventListener('click', () => {
+                const element = document.getElementById('letter');
+                const filename = `Cover_Letter_${roleTitle}_at_${companyName}.pdf`.replace(/[^a-zA-Z0-9_\.]/g, '_').replace(/_+/g, '_').toLowerCase();
+                const opt = {
+                    margin: 0.4,
+                    filename: filename,
+                    image: { type: 'jpeg', quality: 0.98 },
+                    html2canvas: { scale: 2, useCORS: true },
+                    jsPDF: { unit: 'in', format: 'a4', orientation: 'portrait' }
+                };
+                html2pdf().set(opt).from(element).save();
+            });
+        }
+    </script>
+</body>
+
+</html>
