@@ -1,359 +1,506 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Rachmat Maulana Saleh</title>
-    <link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16x16.png">
-    <link rel="icon" type="image/png" sizes="192x192" href="assets/android-chrome-192x192.png">
-    <link rel="icon" type="image/png" sizes="512x512" href="assets/android-chrome-512x512.png">
-    <link rel="shortcut icon" href="assets/favicon.ico">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Dekko|Lato:900|Rock+Salt">
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="assets/apple-touch-icon.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="assets/favicon-32x32.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="assets/favicon-16x16.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="192x192"
+      href="assets/android-chrome-192x192.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="512x512"
+      href="assets/android-chrome-512x512.png"
+    />
+    <link rel="shortcut icon" href="assets/favicon.ico" />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css?family=Dekko|Lato:900|Rock+Salt"
+    />
     <style>
-        *,
-        *::before,
-        *::after {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+      *,
+      *::before,
+      *::after {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
 
-        html,
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        background-color: #eeece6;
+        color-scheme: light dark;
+        gap: 2rem;
+        padding-bottom: 60px;
+      }
+
+      .music-footer {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: 56px;
+        z-index: 9999;
+        border: none;
+        overflow: hidden;
+      }
+
+      .music-footer iframe {
+        width: 100%;
+        height: 100%;
+        border: none;
+      }
+
+      @media (prefers-color-scheme: dark) {
         body {
-            margin: 0;
-            padding: 0;
+          background-color: #121212;
         }
+      }
 
-        body {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            background-color: #EEECE6;
-            color-scheme: light dark;
-            gap: 2rem;
-            padding-bottom: 60px;
-        }
+      .photo-wrapper {
+        position: relative;
+        display: inline-block;
+      }
 
-        .music-footer {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            height: 56px;
-            z-index: 9999;
-            border: none;
-            overflow: hidden;
-        }
+      .photo-wrapper img {
+        max-width: 90vw;
+        max-height: 90vh;
+        object-fit: contain;
+        display: block;
+      }
 
-        .music-footer iframe {
-            width: 100%;
-            height: 100%;
-            border: none;
-        }
+      /* Speech bubble (WhatsApp) */
+      .speech-bubble {
+        top: 42%;
+        left: 58%;
+        padding: 50px 30px 5px;
+        position: absolute;
+        transform: translate(-50%, -50%);
+        display: inline-block;
+        font-weight: bolder;
+        background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' preserveAspectRatio='none' viewBox='0 0 132 136' style='transform:scale(-1,-1)'%3E%3Cdefs%3E%3Cstyle%3Epath%7Bfill:white;stroke:%23000;stroke-width:4;stroke-linejoin:bevel;vector-effect:non-scaling-stroke%7D%3C/style%3E%3C/defs%3E%3Cpath d='M66.1 1.5C30.4 1.5 1.5 22.9 1.5 46c0 18.1 17.9 33.5 42.8 39.3 1.5 14.8-1.3 39-8.5 48.1 10.8-12.5 22.4-33.6 26.6-45.7 1.2 0 2.5.1 3.7.1 35.7 0 64.6-18.7 64.6-41.8S101.8 1.5 66.1 1.5zM35.8 133.4c-.3.4-.7.8-1 1.1.4-.3.7-.7 1-1.1z'/%3E%3C/svg%3E")
+          no-repeat center center;
+        background-size: auto;
+        background-size: auto;
+        background-size: 100% 100%;
+        font-family:
+          -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        font-size: 14px;
+        color: #000;
+        text-decoration: none;
+        white-space: nowrap;
+        min-width: 140px;
+        min-height: 130px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: transform 0.2s ease;
+        z-index: 900;
+      }
 
-        @media (prefers-color-scheme: dark) {
-            body {
-                background-color: #121212;
-            }
-        }
+      .speech-bubble:hover {
+        transform: translate(-50%, -50%) scale(1.05);
+      }
 
-        .photo-wrapper {
-            position: relative;
-            display: inline-block;
-        }
+      /* Name tag (.tag from CodePen) */
+      .tag {
+        position: absolute;
+        left: 100%;
+        transform: translate(-50%, calc(-50% - 120px));
+        padding: 1rem 4rem 9rem;
+        border-radius: 30px;
+        font-size: 1.5rem;
+        color: #fff;
+        background: #f8012d;
+        text-align: center;
+        font-family: "Lato", sans-serif;
+        box-shadow: 0 1px 15px -7.5px #000000;
+        z-index: 5;
+        top: 50%;
+        margin-top: 240px;
+        margin-left: -130px;
+      }
 
-        .photo-wrapper img {
-            max-width: 90vw;
-            max-height: 90vh;
-            object-fit: contain;
-            display: block;
-        }
+      .tag strong {
+        text-transform: uppercase;
+        font-size: 2.5rem;
+      }
 
-        /* Speech bubble (WhatsApp) */
-        .speech-bubble {
-            top: 42%;
-            left: 58%;
-            padding: 50px 30px 5px;
-            position: absolute;
-            transform: translate(-50%, -50%);
-            display: inline-block;
-            font-weight: bolder;
-            background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' preserveAspectRatio='none' viewBox='0 0 132 136' style='transform:scale(-1,-1)'%3E%3Cdefs%3E%3Cstyle%3Epath%7Bfill:white;stroke:%23000;stroke-width:4;stroke-linejoin:bevel;vector-effect:non-scaling-stroke%7D%3C/style%3E%3C/defs%3E%3Cpath d='M66.1 1.5C30.4 1.5 1.5 22.9 1.5 46c0 18.1 17.9 33.5 42.8 39.3 1.5 14.8-1.3 39-8.5 48.1 10.8-12.5 22.4-33.6 26.6-45.7 1.2 0 2.5.1 3.7.1 35.7 0 64.6-18.7 64.6-41.8S101.8 1.5 66.1 1.5zM35.8 133.4c-.3.4-.7.8-1 1.1.4-.3.7-.7 1-1.1z'/%3E%3C/svg%3E") no-repeat center center;
-            background-size: auto;
-            background-size: auto;
-            background-size: 100% 100%;
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            font-size: 14px;
-            color: #000;
-            text-decoration: none;
-            white-space: nowrap;
-            min-width: 140px;
-            min-height: 130px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: transform 0.2s ease;
-            z-index: 900;
-        }
+      .tag:before {
+        content: "";
+        position: absolute;
+        top: 7rem;
+        left: 2%;
+        width: 96%;
+        height: 7.5rem;
+        background: #fff;
+        border-radius: 0 0 30px 30px;
+      }
 
-        .speech-bubble:hover {
-            transform: translate(-50%, -50%) scale(1.05);
-        }
+      .tag:after {
+        content: "Rachmat Maulana Saleh";
+        position: absolute;
+        top: 7.5rem;
+        left: 0;
+        width: 100%;
+        text-align: center;
+        font-family: "Rock Salt", cursive;
+        font-size: 1.3rem;
+        letter-spacing: 0.15rem;
+        font-weight: bold;
+        color: #000;
+      }
 
-        /* Name tag (.tag from CodePen) */
-        .tag {
-            position: absolute;
-            left: 100%;
-            transform: translate(-50%, calc(-50% - 120px));
-            padding: 1rem 4rem 9rem;
-            border-radius: 30px;
-            font-size: 1.5rem;
-            color: #fff;
-            background: #f8012d;
-            text-align: center;
-            font-family: "Lato", sans-serif;
-            box-shadow: 0 1px 15px -7.5px #000000;
-            z-index: 5;
-            top: 50%;
-            margin-top: 240px;
-            margin-left: -130px;
-        }
+      /* Comic bubble (.bubble from CodePen) */
+      .bubble {
+        position: relative;
+        transform: translate(-50%, calc(-50% + 120px));
+        max-width: 500px;
+        padding: 0.5rem 1.5rem;
+        text-align: center;
+        font-family: "Dekko", cursive;
+        text-transform: uppercase;
+        font-size: 1.5rem;
+        letter-spacing: 0.2rem;
+        background:
+          url('data:image/svg+xml;utf8,<svg width="100" height="100" transform="rotate(25)" opacity="0.3" version="1.1" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><g fill="#250E17"><circle cx="25" cy="25" r="12.5"/><circle cx="75" cy="75" r="12.5"/><circle cx="75" cy="25" r="12.5"/><circle cx="25" cy="75" r="12.5"/></g></svg>'),
+          #fff;
+        background-size: 12px, 100%;
+        border: 0.4rem solid #000;
+        color: #000;
+        text-decoration: none;
+        white-space: nowrap;
+        z-index: 5;
+      }
 
-        .tag strong {
-            text-transform: uppercase;
-            font-size: 2.5rem;
-        }
+      .bubble:hover {
+        transform: translate(-50%, calc(-50% + 120px)) scale(1.03);
+        transition: transform 0.2s ease;
+      }
 
-        .tag:before {
-            content: "";
-            position: absolute;
-            top: 7rem;
-            left: 2%;
-            width: 96%;
-            height: 7.5rem;
-            background: #fff;
-            border-radius: 0 0 30px 30px;
-        }
+      .bubble--highlight {
+        background:
+          url('data:image/svg+xml;utf8,<svg width="100" height="100" transform="rotate(25)" opacity="0.8" version="1.1" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><g  fill="%23d68810"><circle cx="25" cy="25" r="12.5"/><circle cx="75" cy="75" r="12.5"/><circle cx="75" cy="25" r="12.5"/><circle cx="25" cy="75" r="12.5"/></g></svg>'),
+          #ffcd28;
+        background-size: 13px, 100%;
+        font-weight: 700;
+      }
 
-        .tag:after {
-            content: "Rachmat Maulana Saleh";
-            position: absolute;
-            top: 7.5rem;
-            left: 0;
-            width: 100%;
-            text-align: center;
-            font-family: "Rock Salt", cursive;
-            font-size: 1.3rem;
-            letter-spacing: 0.15rem;
-            font-weight: bold;
-            color: #000;
-        }
+      /* for the highlight container always add an exclamation point */
+      .bubble--highlight:after {
+        content: "!";
+      }
 
+      .bubble-download-resume {
+        position: absolute;
+        top: 0;
+        font-size: 1.3rem;
+        left: 50%;
+        margin-top: -89px;
+      }
 
-        /* Comic bubble (.bubble from CodePen) */
-        .bubble {
-            position: relative;
-            transform: translate(-50%, calc(-50% + 120px));
-            max-width: 500px;
-            padding: 0.5rem 1.5rem;
-            text-align: center;
-            font-family: "Dekko", cursive;
-            text-transform: uppercase;
-            font-size: 1.5rem;
-            letter-spacing: 0.2rem;
-            background: url('data:image/svg+xml;utf8,<svg width="100" height="100" transform="rotate(25)" opacity="0.3" version="1.1" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><g fill="#250E17"><circle cx="25" cy="25" r="12.5"/><circle cx="75" cy="75" r="12.5"/><circle cx="75" cy="25" r="12.5"/><circle cx="25" cy="75" r="12.5"/></g></svg>'),
-                #fff;
-            background-size: 12px, 100%;
-            border: 0.4rem solid #000;
-            color: #000;
-            text-decoration: none;
-            white-space: nowrap;
-            z-index: 5;
-        }
+      /* Portfolio */
+      .portfolio {
+        width: 100%;
+        max-width: 1000px;
+        padding: 0 1rem;
+        font-family:
+          -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        margin-bottom: 2rem;
+      }
 
-        .bubble:hover {
-            transform: translate(-50%, calc(-50% + 120px)) scale(1.03);
-            transition: transform 0.2s ease;
-        }
+      .portfolio h2 {
+        text-align: center;
+        font-family: "Lato", sans-serif;
+        text-transform: uppercase;
+        letter-spacing: 0.15rem;
+        margin-bottom: 1.5rem;
+        color: #000;
+      }
 
-        .bubble--highlight {
-            background: url('data:image/svg+xml;utf8,<svg width="100" height="100" transform="rotate(25)" opacity="0.8" version="1.1" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><g  fill="%23d68810"><circle cx="25" cy="25" r="12.5"/><circle cx="75" cy="75" r="12.5"/><circle cx="75" cy="25" r="12.5"/><circle cx="25" cy="75" r="12.5"/></g></svg>'),#ffcd28;
-            background-size: 13px, 100%;
-            font-weight: 700;
-        }
-
-        /* for the highlight container always add an exclamation point */
-        .bubble--highlight:after {
-            content: "!";
-        }
-
-        .bubble-download-resume {
-            position: absolute;
-            top: 0;
-            font-size: 1.3rem;
-            left: 50%;
-            margin-top: -89px;
-        }
-
-        /* Portfolio */
-        .portfolio {
-            width: 100%;
-            max-width: 1000px;
-            padding: 0 1rem;
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            margin-bottom: 2rem;
-        }
-
+      @media (prefers-color-scheme: dark) {
         .portfolio h2 {
-            text-align: center;
-            font-family: "Lato", sans-serif;
-            text-transform: uppercase;
-            letter-spacing: 0.15rem;
-            margin-bottom: 1.5rem;
-            color: #000;
+          color: #fff;
+        }
+      }
+
+      .portfolio-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+        gap: 1.25rem;
+      }
+
+      .portfolio-card {
+        display: flex;
+        flex-direction: column;
+        background: #fff;
+        border: 3px solid #000;
+        border-radius: 8px;
+        padding: 1.25rem;
+        color: #000;
+      }
+
+      .portfolio-card h3 {
+        margin-bottom: 0.5rem;
+        font-family: "Lato", sans-serif;
+        font-size: 1.1rem;
+      }
+
+      .portfolio-card p {
+        font-size: 0.9rem;
+        line-height: 1.45;
+        color: #333;
+      }
+
+      .portfolio-actions {
+        margin-top: auto;
+        padding-top: 1rem;
+        display: flex;
+        gap: 0.75rem;
+      }
+
+      .portfolio-btn {
+        display: inline-block;
+        background: #fff;
+        border: 3px solid #000;
+        border-radius: 6px;
+        padding: 0.4rem 1rem;
+        font-family: "Lato", sans-serif;
+        font-weight: 900;
+        font-size: 0.8rem;
+        letter-spacing: 0.08rem;
+        text-transform: uppercase;
+        text-decoration: none;
+        color: #000;
+        transition:
+          background-color 0.2s ease,
+          transform 0.2s ease;
+      }
+
+      .portfolio-btn:hover {
+        background: #ffcd28;
+        transform: translateY(-2px);
+      }
+
+      .bubble2 {
+        line-height: 1.3;
+        padding: 2%;
+        transform: rotate(-10deg);
+
+        &::before {
+          content: "";
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          background: radial-gradient(circle at center, #fff 1px, transparent 1%);
+          background-repeat: repeat;
+          background-size: 8px 8px;
+          border-radius: 10px;
+          z-index: -1;
         }
 
-        @media (prefers-color-scheme: dark) {
-            .portfolio h2 {
-                color: #fff;
-            }
+        p {
+          text-shadow:-0.2vmin -0.2vmin 0 #fff, -0.4vmin -0.4vmin 0 #fff, -0.6vmin -0.6vmin 0 #fff, -0.8vmin -0.8vmin 0 #fff, -1vmin -1vmin 0 #fff, -1.2vmin -1.2vmin 0 #fff, -1.4vmin -1.4vmin 0 #fff, 0.2vmin 0.2vmin 0 #fff, 0.4vmin 0.4vmin 0 #fff, 0.6vmin 0.6vmin 0 #fff, 0.8vmin 0.8vmin 0 #fff, 1vmin 1vmin 0 #fff, 1.2vmin 1.2vmin 0 #fff, 1.4vmin 1.4vmin 0 #fff
         }
+      }
 
-        .portfolio-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 1.25rem;
-        }
-
-        .portfolio-card {
-            display: flex;
-            flex-direction: column;
-            background: #fff;
-            border: 3px solid #000;
-            border-radius: 8px;
-            padding: 1.25rem;
-            color: #000;
-        }
-
-        .portfolio-card h3 {
-            margin-bottom: 0.5rem;
-            font-family: "Lato", sans-serif;
-            font-size: 1.1rem;
-        }
-
-        .portfolio-card p {
-            font-size: 0.9rem;
-            line-height: 1.45;
-            color: #333;
-        }
-
-        .portfolio-actions {
-            margin-top: auto;
-            padding-top: 1rem;
-            display: flex;
-            gap: 0.75rem;
-        }
-
-        .portfolio-btn {
-            display: inline-block;
-            background: #fff;
-            border: 3px solid #000;
-            border-radius: 6px;
-            padding: 0.4rem 1rem;
-            font-family: "Lato", sans-serif;
-            font-weight: 900;
-            font-size: 0.8rem;
-            letter-spacing: 0.08rem;
-            text-transform: uppercase;
-            text-decoration: none;
-            color: #000;
-            transition: background-color 0.2s ease, transform 0.2s ease;
-        }
-
-        .portfolio-btn:hover {
-            background: #ffcd28;
-            transform: translateY(-2px);
-        }
+      .bubble2-top {
+        position: absolute;
+        top: 12.5%;
+        left: 0;
+      }
     </style>
-</head>
+  </head>
 
-<body>
+  <body>
     <div class="photo-wrapper">
-        <img src="team.jpeg" alt="Team">
+      <img src="team.jpeg" alt="Team" />
 
-        <!-- Name tag -->
-        <div class="tag">
-            <strong>Hello</strong>
-            <br>
-            my name is
-        </div>
+      <!-- Name tag -->
+      <div class="tag">
+        <strong>Hello</strong>
+        <br />
+        my name is
+      </div>
 
-        <!-- Speech bubble (WhatsApp) -->
-        <a class="speech-bubble" href="https://wa.me/6282110210890" target="_blank" rel="noopener">Drop me a
-            WhatsApp<br>Message</a>
+      <!-- Speech bubble (WhatsApp) -->
+      <a
+        class="speech-bubble"
+        href="https://wa.me/6282110210890"
+        target="_blank"
+        rel="noopener"
+        >Drop me a WhatsApp<br />Message</a
+      >
 
-        <!-- Comic bubble (resume download) -->
-        <a class="bubble bubble--highlight bubble-download-resume" href="./resume.html" target="_blank" rel="noopener">Download My Resume</a>
-            
+      <!-- Comic bubble (resume download) -->
+      <a
+        class="bubble bubble--highlight bubble-download-resume"
+        href="./resume.html"
+        target="_blank"
+        rel="noopener"
+        >Download My Resume</a
+      >
+
+      <div class="bubble2 bubble2-top">
+        <p>Scroll to see my portfolio!!</p>
+      </div>
     </div>
 
     <section class="portfolio">
-        <h2>My Portfolio</h2>
-        <div class="portfolio-grid">
-            <div class="portfolio-card">
-                <h3>Service Center Simulation</h3>
-                <p>A TypeScript CLI simulating a smartphone service center where two technicians repair phones from a customer queue, built with Hexagonal Architecture and recursion.</p>
-                <div class="portfolio-actions">
-                    <a class="portfolio-btn" href="https://github.com/rachmatm/service-center-simulation" target="_blank" rel="noopener">GitHub</a>
-                </div>
-            </div>
-            <div class="portfolio-card">
-                <h3>ATM CLI Challenge</h3>
-                <p>An interactive TypeScript CLI that simulates an ATM connected to a retail bank, modeling customers, balances, debt tracking, and automatic debt settlement entirely in memory.</p>
-                <div class="portfolio-actions">
-                    <a class="portfolio-btn" href="https://github.com/rachmatm/challenge-atm-cli" target="_blank" rel="noopener">GitHub</a>
-                </div>
-            </div>
-            <div class="portfolio-card">
-                <h3>Sturdy Doodle</h3>
-                <p>An AI-powered web app that lets small-business owners generate, save, and refine logo concepts, with pluggable local or cloud storage for any host.</p>
-                <div class="portfolio-actions">
-                    <a class="portfolio-btn" href="https://github.com/rachmatm/sturdy-doodle" target="_blank" rel="noopener">GitHub</a>
-                    <a class="portfolio-btn" href="https://rchmt-porto1.vercel.app/" target="_blank" rel="noopener">Demo</a>
-                </div>
-            </div>
-            <div class="portfolio-card">
-                <h3>Web Study Companion</h3>
-                <p>A web-based study companion app built with Next.js, bootstrapped with v0 and continuously deployed to Vercel on every merge to main.</p>
-                <div class="portfolio-actions">
-                    <a class="portfolio-btn" href="https://github.com/rachmatm/v0-web-study-companion" target="_blank" rel="noopener">GitHub</a>
-                    <a class="portfolio-btn" href="https://v0-web-study-companion.vercel.app/" target="_blank" rel="noopener">Demo</a>
-                </div>
-            </div>
-            <div class="portfolio-card">
-                <h3>Ubuntu Clipboard Manager</h3>
-                <p>An Electron.js desktop clipboard manager for Ubuntu featuring clipboard history, custom tabs, pinning, search, and a premium dark glassmorphism UI.</p>
-                <div class="portfolio-actions">
-                    <a class="portfolio-btn" href="https://github.com/rachmatm/ubuntu-clipboard-manager" target="_blank" rel="noopener">GitHub</a>
-                </div>
-            </div>
-            <div class="portfolio-card">
-                <h3>Docker Images</h3>
-                <p>A collection of custom Dockerfiles for PHP, Node.js, Ruby, and Composer toolchains, most bundling Supervisor to run long-lived processes like queues and schedulers.</p>
-                <div class="portfolio-actions">
-                    <a class="portfolio-btn" href="https://github.com/rachmatm/docker" target="_blank" rel="noopener">GitHub</a>
-                </div>
-            </div>
+      <h2>My Portfolio</h2>
+      <div class="portfolio-grid">
+        <div class="portfolio-card">
+          <h3>Service Center Simulation</h3>
+          <p>
+            A TypeScript CLI simulating a smartphone service center where two
+            technicians repair phones from a customer queue, built with
+            Hexagonal Architecture and recursion.
+          </p>
+          <div class="portfolio-actions">
+            <a
+              class="portfolio-btn"
+              href="https://github.com/rachmatm/service-center-simulation"
+              target="_blank"
+              rel="noopener"
+              >GitHub</a
+            >
+          </div>
         </div>
+        <div class="portfolio-card">
+          <h3>ATM CLI Challenge</h3>
+          <p>
+            An interactive TypeScript CLI that simulates an ATM connected to a
+            retail bank, modeling customers, balances, debt tracking, and
+            automatic debt settlement entirely in memory.
+          </p>
+          <div class="portfolio-actions">
+            <a
+              class="portfolio-btn"
+              href="https://github.com/rachmatm/challenge-atm-cli"
+              target="_blank"
+              rel="noopener"
+              >GitHub</a
+            >
+          </div>
+        </div>
+        <div class="portfolio-card">
+          <h3>Sturdy Doodle</h3>
+          <p>
+            An AI-powered web app that lets small-business owners generate,
+            save, and refine logo concepts, with pluggable local or cloud
+            storage for any host.
+          </p>
+          <div class="portfolio-actions">
+            <a
+              class="portfolio-btn"
+              href="https://github.com/rachmatm/sturdy-doodle"
+              target="_blank"
+              rel="noopener"
+              >GitHub</a
+            >
+            <a
+              class="portfolio-btn"
+              href="https://rchmt-porto1.vercel.app/"
+              target="_blank"
+              rel="noopener"
+              >Demo</a
+            >
+          </div>
+        </div>
+        <div class="portfolio-card">
+          <h3>Web Study Companion</h3>
+          <p>
+            A web-based study companion app built with Next.js, bootstrapped
+            with v0 and continuously deployed to Vercel on every merge to main.
+          </p>
+          <div class="portfolio-actions">
+            <a
+              class="portfolio-btn"
+              href="https://github.com/rachmatm/v0-web-study-companion"
+              target="_blank"
+              rel="noopener"
+              >GitHub</a
+            >
+            <a
+              class="portfolio-btn"
+              href="https://v0-web-study-companion.vercel.app/"
+              target="_blank"
+              rel="noopener"
+              >Demo</a
+            >
+          </div>
+        </div>
+        <div class="portfolio-card">
+          <h3>Ubuntu Clipboard Manager</h3>
+          <p>
+            An Electron.js desktop clipboard manager for Ubuntu featuring
+            clipboard history, custom tabs, pinning, search, and a premium dark
+            glassmorphism UI.
+          </p>
+          <div class="portfolio-actions">
+            <a
+              class="portfolio-btn"
+              href="https://github.com/rachmatm/ubuntu-clipboard-manager"
+              target="_blank"
+              rel="noopener"
+              >GitHub</a
+            >
+          </div>
+        </div>
+        <div class="portfolio-card">
+          <h3>Docker Images</h3>
+          <p>
+            A collection of custom Dockerfiles for PHP, Node.js, Ruby, and
+            Composer toolchains, most bundling Supervisor to run long-lived
+            processes like queues and schedulers.
+          </p>
+          <div class="portfolio-actions">
+            <a
+              class="portfolio-btn"
+              href="https://github.com/rachmatm/docker"
+              target="_blank"
+              rel="noopener"
+              >GitHub</a
+            >
+          </div>
+        </div>
+      </div>
     </section>
 
     <div class="music-footer">
-        <iframe src="music.html" allow="autoplay" title="Radio Player"></iframe>
+      <iframe src="music.html" allow="autoplay" title="Radio Player"></iframe>
     </div>
-</body>
-
+  </body>
 </html>
