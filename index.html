@@ -32,7 +32,7 @@
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            background-color: #fff;
+            background-color: #EEECE6;
             color-scheme: light dark;
             gap: 2rem;
             padding-bottom: 60px;
@@ -198,6 +198,86 @@
             left: 50%;
             margin-top: -89px;
         }
+
+        /* Portfolio */
+        .portfolio {
+            width: 100%;
+            max-width: 1000px;
+            padding: 0 1rem;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            margin-bottom: 2rem;
+        }
+
+        .portfolio h2 {
+            text-align: center;
+            font-family: "Lato", sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 0.15rem;
+            margin-bottom: 1.5rem;
+            color: #000;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            .portfolio h2 {
+                color: #fff;
+            }
+        }
+
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1.25rem;
+        }
+
+        .portfolio-card {
+            display: flex;
+            flex-direction: column;
+            background: #fff;
+            border: 3px solid #000;
+            border-radius: 8px;
+            padding: 1.25rem;
+            color: #000;
+        }
+
+        .portfolio-card h3 {
+            margin-bottom: 0.5rem;
+            font-family: "Lato", sans-serif;
+            font-size: 1.1rem;
+        }
+
+        .portfolio-card p {
+            font-size: 0.9rem;
+            line-height: 1.45;
+            color: #333;
+        }
+
+        .portfolio-actions {
+            margin-top: auto;
+            padding-top: 1rem;
+            display: flex;
+            gap: 0.75rem;
+        }
+
+        .portfolio-btn {
+            display: inline-block;
+            background: #fff;
+            border: 3px solid #000;
+            border-radius: 6px;
+            padding: 0.4rem 1rem;
+            font-family: "Lato", sans-serif;
+            font-weight: 900;
+            font-size: 0.8rem;
+            letter-spacing: 0.08rem;
+            text-transform: uppercase;
+            text-decoration: none;
+            color: #000;
+            transition: background-color 0.2s ease, transform 0.2s ease;
+        }
+
+        .portfolio-btn:hover {
+            background: #ffcd28;
+            transform: translateY(-2px);
+        }
     </style>
 </head>
 
@@ -221,10 +301,55 @@
             
     </div>
 
-    <div class="photo-wrapper">
-        <img src="family.jpeg" alt="Family">
-        <br>
-    </div>
+    <section class="portfolio">
+        <h2>My Portfolio</h2>
+        <div class="portfolio-grid">
+            <div class="portfolio-card">
+                <h3>Service Center Simulation</h3>
+                <p>A TypeScript CLI simulating a smartphone service center where two technicians repair phones from a customer queue, built with Hexagonal Architecture and recursion.</p>
+                <div class="portfolio-actions">
+                    <a class="portfolio-btn" href="https://github.com/rachmatm/service-center-simulation" target="_blank" rel="noopener">GitHub</a>
+                </div>
+            </div>
+            <div class="portfolio-card">
+                <h3>ATM CLI Challenge</h3>
+                <p>An interactive TypeScript CLI that simulates an ATM connected to a retail bank, modeling customers, balances, debt tracking, and automatic debt settlement entirely in memory.</p>
+                <div class="portfolio-actions">
+                    <a class="portfolio-btn" href="https://github.com/rachmatm/challenge-atm-cli" target="_blank" rel="noopener">GitHub</a>
+                </div>
+            </div>
+            <div class="portfolio-card">
+                <h3>Sturdy Doodle</h3>
+                <p>An AI-powered web app that lets small-business owners generate, save, and refine logo concepts, with pluggable local or cloud storage for any host.</p>
+                <div class="portfolio-actions">
+                    <a class="portfolio-btn" href="https://github.com/rachmatm/sturdy-doodle" target="_blank" rel="noopener">GitHub</a>
+                    <a class="portfolio-btn" href="https://rchmt-porto1.vercel.app/" target="_blank" rel="noopener">Demo</a>
+                </div>
+            </div>
+            <div class="portfolio-card">
+                <h3>Web Study Companion</h3>
+                <p>A web-based study companion app built with Next.js, bootstrapped with v0 and continuously deployed to Vercel on every merge to main.</p>
+                <div class="portfolio-actions">
+                    <a class="portfolio-btn" href="https://github.com/rachmatm/v0-web-study-companion" target="_blank" rel="noopener">GitHub</a>
+                    <a class="portfolio-btn" href="https://v0-web-study-companion.vercel.app/" target="_blank" rel="noopener">Demo</a>
+                </div>
+            </div>
+            <div class="portfolio-card">
+                <h3>Ubuntu Clipboard Manager</h3>
+                <p>An Electron.js desktop clipboard manager for Ubuntu featuring clipboard history, custom tabs, pinning, search, and a premium dark glassmorphism UI.</p>
+                <div class="portfolio-actions">
+                    <a class="portfolio-btn" href="https://github.com/rachmatm/ubuntu-clipboard-manager" target="_blank" rel="noopener">GitHub</a>
+                </div>
+            </div>
+            <div class="portfolio-card">
+                <h3>Docker Images</h3>
+                <p>A collection of custom Dockerfiles for PHP, Node.js, Ruby, and Composer toolchains, most bundling Supervisor to run long-lived processes like queues and schedulers.</p>
+                <div class="portfolio-actions">
+                    <a class="portfolio-btn" href="https://github.com/rachmatm/docker" target="_blank" rel="noopener">GitHub</a>
+                </div>
+            </div>
+        </div>
+    </section>
 
     <div class="music-footer">
         <iframe src="music.html" allow="autoplay" title="Radio Player"></iframe>
