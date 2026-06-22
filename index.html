@@ -322,8 +322,21 @@
 
       .techstack-grid {
         display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(440px, 1fr));
+        grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+        align-items: start;
         gap: 1.25rem;
+      }
+
+      .techstack-column {
+        display: flex;
+        flex-direction: column;
+        gap: 1.25rem;
+      }
+
+      @media (max-width: 720px) {
+        .techstack-grid {
+          grid-template-columns: 1fr;
+        }
       }
 
       .techstack-card {
@@ -683,41 +696,44 @@
           </ul>
         </div>
 
-        <div class="techstack-card">
-          <h3>Frontend / CMS</h3>
-          <p class="techstack-summary">
-            Next.js / React, v0, HTML/CSS, WordPress &amp; Elementor.
-          </p>
-        </div>
+        <div class="techstack-column">
+          <div class="techstack-card">
+            <h3>Frontend / CMS</h3>
+            <p class="techstack-summary">
+              Next.js / React, v0, HTML/CSS, WordPress &amp; Elementor.
+            </p>
+          </div>
 
-        <div class="techstack-card">
-          <h3>AI / ML</h3>
-          <p class="techstack-summary">
-            MCP servers, RAG, recommendation models.
-          </p>
-        </div>
+          <div class="techstack-card">
+            <h3>AI / ML</h3>
+            <p class="techstack-summary">
+              MCP servers, RAG, recommendation models.
+            </p>
+          </div>
 
-        <div class="techstack-card">
-          <h3>DevOps / Cloud</h3>
-          <p class="techstack-summary">
-            AWS &rarr; Huawei Cloud (cost-driven migration), Capistrano, Docker,
-            Vercel, GitHub Actions, Supervisor, cron.
-          </p>
-        </div>
+          <div class="techstack-card">
+            <h3>DevOps / Cloud</h3>
+            <p class="techstack-summary">
+              AWS &rarr; Huawei Cloud (cost-driven migration), Terraform,
+              Capistrano, Docker, Vercel, GitHub Actions, Supervisor, cron.
+            </p>
+          </div>
 
-        <div class="techstack-card">
-          <h3>Tools &amp; Collaboration</h3>
-          <p class="techstack-summary">
-            Notion, Jira, Slack, Lark, Figma, Loom.
-          </p>
-        </div>
+          <div class="techstack-card">
+            <h3>Tools &amp; Collaboration</h3>
+            <p class="techstack-summary">
+              Notion, Jira, Slack, Lark, Figma, Loom.
+            </p>
+          </div>
 
-        <div class="techstack-card techstack-card--note">
-          <h3>Proficient (no pro experience yet)</h3>
-          <p class="techstack-summary">
-            <span class="tech-name">Go</span> &mdash; confident in personal
-            projects, no professional experience yet.
-          </p>
+          <div class="techstack-card techstack-card--note">
+            <h3>Proficient (no pro experience yet)</h3>
+            <p class="techstack-summary">
+              <span class="tech-name">Go</span> and
+              <span class="tech-name">Java / Spring Boot</span> &mdash;
+              confident in personal projects, no professional experience yet.
+            </p>
+          </div>
         </div>
       </div>
     </section>
