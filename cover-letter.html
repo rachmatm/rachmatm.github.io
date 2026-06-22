@@ -126,6 +126,41 @@
             padding: 0 2px;
         }
 
+        .letter__tagline {
+            margin-top: 0.5rem;
+            font-style: italic;
+            font-size: 90%;
+            color: #666;
+        }
+
+        .letter__divider {
+            display: flex;
+            align-items: center;
+            text-align: center;
+            margin: 3rem 0 2.5rem;
+            color: #999;
+            font-size: 0.72rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.18em;
+        }
+
+        .letter__divider::before,
+        .letter__divider::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: #e5e5e5;
+        }
+
+        .letter__divider::before {
+            margin-right: 1rem;
+        }
+
+        .letter__divider::after {
+            margin-left: 1rem;
+        }
+
         .download-btn {
             display: block;
             max-width: 720px;
@@ -190,27 +225,48 @@
     <div class="letter" id="letter">
         <div class="letter__header">
             <div class="letter__name">Rachmat Maulana Saleh</div>
-            <div class="letter__title">Building scalable systems, solving messy real-world problems
+            <div class="letter__title">Building scalable systems, solving messy real-world problems</div>
+            <p class="letter__tagline">Sistem yang handal dan menjawab berbagai tantangan nyata & komplek</p>
         </div>
-
-        
 
         <div class="letter__date" id="date"></div>
 
         <div class="letter__greeting" id="greeting">Dear Hiring Manager,</div>
 
         <div class="letter__body">
-            <p>I am writing to express my interest in the <span class="highlight" id="roleInline">Software Engineer</span> position. With 15 years of experience as a Full-Stack Engineer, I bring deep expertise in backend architecture, database design, query optimization, indexing strategies, system integration, and performance tuning. I also have extensive frontend experience building responsive, user-focused applications using modern web technologies.</p>
+            <p>I am writing to express my strong interest in the <span class="highlight" id="roleInline">Software Engineer</span> position. With 15 years of experience as a full-stack engineer, I bring deep expertise in backend architecture, database design, query optimization, indexing strategies, system integration, and performance tuning; complemented by extensive frontend experience building responsive, user-focused applications with modern web technologies.</p>
 
-            <p>Having worked across the entire technology stack, I am able to bridge technical implementation, user experience, and business requirements effectively. I am also well-positioned to thrive in the AI-assisted engineering era, leveraging AI-powered tools to accelerate development, enhance quality, and solve complex problems more efficiently. Additionally, I bring hands-on DevOps experience managing cloud infrastructure, CI/CD pipelines, deployment automation, monitoring, and system reliability.</p>
+            <p>Having worked across the entire technology stack, I bridge technical implementation, user experience, and business needs with equal fluency. I am also well-positioned to thrive in the AI-assisted engineering era, using AI-powered tools to accelerate delivery, raise quality, and solve complex problems more efficiently. On the operational side, I bring hands-on DevOps experience spanning cloud infrastructure, CI/CD pipelines, deployment automation, monitoring, and system reliability.</p>
 
-            <p>I would welcome the opportunity to discuss how my background aligns with the needs of <span class="highlight" id="companyInline">your company</span> for the <span id="roleInline2">Software Engineer</span> role. My resume is available here: <a href="https://rachmatm.github.io" target="_blank" rel="noopener">rachmatm.github.io</a></p>
+            <p>I would welcome the opportunity to discuss how my background aligns with the needs of <span class="highlight" id="companyInline">your company</span> for the <span id="roleInline2">Software Engineer</span> role. My resume and portfolio are available at <a href="https://rachmatm.github.io" target="_blank" rel="noopener">rachmatm.github.io</a>.</p>
 
             <p>Thank you for your time and consideration.</p>
         </div>
 
         <div class="letter__closing">
             <p>Best regards,</p>
+        </div>
+
+        <div class="letter__signature">Rachmat Maulana Saleh</div>
+
+        <div class="letter__divider"><span aria-label="Bahasa Indonesia" role="img" style="font-size: 1.6rem; line-height: 1;">🇮🇩</span></div>
+
+        <div class="letter__date" id="dateId"></div>
+
+        <div class="letter__greeting" id="greetingId">Kepada Yth. Hiring Manager,</div>
+
+        <div class="letter__body">
+            <p>Saya tertarik dengan posisi <span class="highlight" id="roleInlineId">Software Engineer</span>. Dengan pengalaman 15 tahun sebagai full-stack engineer, saya memiliki keahlian mendalam dalam arsitektur backend, desain database, optimasi query, strategi indexing, integrasi sistem, dan peningkatan performa; dan juga pengalaman frontend yang luas dalam membangun aplikasi yang responsif dan berfokus pada pengguna menggunakan teknologi web terbaru.</p>
+
+            <p>Saya berpengalaman bekerja di semua bagian dalan pengembangan produk online, dengan itu saya mampu menjembatani implementasi teknis, pengalaman pengguna, dan kebutuhan bisnis secara seimbang. Saya juga siap berkembang di era AI, dengan memanfaatkan alat berbasis AI untuk mempercepat pengembangan, meningkatkan kualitas, dan menyelesaikan masalah kompleks secara lebih efisien. Di sisi operasional, saya memiliki pengalaman langsung di bidang DevOps, mulai dari infrastruktur cloud, pipeline CI/CD, otomasi deployment, monitoring, hingga keandalan sistem.</p>
+
+            <p>Saya menyambut baik kesempatan untuk mendiskusikan bagaimana latar belakang saya selaras dengan kebutuhan <span class="highlight" id="companyInlineId">your company</span> untuk posisi <span id="roleInline2Id">Software Engineer</span>. Resume dan portofolio saya dapat diakses di <a href="https://rachmatm.github.io" target="_blank" rel="noopener">rachmatm.github.io</a>.</p>
+
+            <p>Terima kasih atas waktu dan perhatian Anda.</p>
+        </div>
+
+        <div class="letter__closing">
+            <p>Hormat saya,</p>
         </div>
 
         <div class="letter__signature">Rachmat Maulana Saleh</div>
@@ -241,9 +297,15 @@
             document.getElementById('roleInline2').textContent = roleTitle;
             document.getElementById('companyInline').textContent = companyName;
 
+            document.getElementById('greetingId').textContent = `Kepada Yth. ${recipientName},`;
+            document.getElementById('roleInlineId').textContent = roleTitle;
+            document.getElementById('roleInline2Id').textContent = roleTitle;
+            document.getElementById('companyInlineId').textContent = companyName;
+
             const now = new Date();
             const options = { year: 'numeric', month: 'long', day: 'numeric' };
             document.getElementById('date').textContent = now.toLocaleDateString('en-US', options);
+            document.getElementById('dateId').textContent = now.toLocaleDateString('id-ID', options);
 
             document.title = `Cover Letter - ${roleTitle} at ${companyName}`;
 
