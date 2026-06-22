@@ -302,6 +302,89 @@
         }
       }
 
+      /* Tech Stack / Skills & Experience */
+      .techstack {
+        width: 100%;
+        max-width: 1000px;
+        padding: 0 1rem;
+        font-family:
+          -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      }
+
+      .techstack h2 {
+        text-align: center;
+        font-family: "Lato", sans-serif;
+        text-transform: uppercase;
+        letter-spacing: 0.15rem;
+        margin-bottom: 1.5rem;
+        color: #000;
+      }
+
+      .techstack-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        gap: 1.25rem;
+      }
+
+      .techstack-card {
+        background: #fff;
+        border: 3px solid #000;
+        border-radius: 8px;
+        padding: 1.25rem 1.5rem 1.5rem;
+        color: #000;
+      }
+
+      .techstack-card h3 {
+        font-family: "Lato", sans-serif;
+        text-transform: uppercase;
+        letter-spacing: 0.08rem;
+        font-size: 0.95rem;
+        margin-bottom: 0.9rem;
+        padding-bottom: 0.5rem;
+        border-bottom: 3px solid #000;
+      }
+
+      .techstack-tags {
+        list-style: none;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+      }
+
+      .techstack-tags li {
+        background: #ffcd28;
+        border: 2px solid #000;
+        border-radius: 6px;
+        padding: 0.3rem 0.7rem;
+        font-family: "Lato", sans-serif;
+        font-weight: 900;
+        font-size: 0.72rem;
+        letter-spacing: 0.05rem;
+        text-transform: uppercase;
+      }
+
+      .techstack-card--note h3 {
+        border-bottom-color: #f8012d;
+      }
+
+      .techstack-card--note .techstack-tags li {
+        background: #fff;
+      }
+
+      .techstack-note {
+        margin-top: 0.85rem;
+        font-size: 0.8rem;
+        line-height: 1.4;
+        color: #555;
+        font-style: italic;
+      }
+
+      @media (prefers-color-scheme: dark) {
+        .techstack h2 {
+          color: #fff;
+        }
+      }
+
       /* Portfolio */
       .portfolio {
         width: 100%;
@@ -483,6 +566,95 @@
           <li>Cloud Infrastructure</li>
           <li>AI-Assisted Engineering</li>
         </ul>
+      </div>
+    </section>
+
+    <section class="techstack">
+      <h2>Tech Stack &amp; Experience</h2>
+      <div class="techstack-grid">
+        <div class="techstack-card">
+          <h3>Backend &mdash; Core</h3>
+          <ul class="techstack-tags">
+            <li>Ruby on Rails (15 yoe)</li>
+            <li>PHP / Laravel</li>
+            <li>Node.js</li>
+            <li>TypeScript</li>
+            <li>Python</li>
+            <li>Sidekiq</li>
+            <li>Cron</li>
+          </ul>
+        </div>
+
+        <div class="techstack-card">
+          <h3>Frontend &amp; CMS</h3>
+          <ul class="techstack-tags">
+            <li>Next.js</li>
+            <li>React</li>
+            <li>HTML / CSS</li>
+            <li>v0</li>
+            <li>WordPress</li>
+            <li>Elementor</li>
+          </ul>
+        </div>
+
+        <div class="techstack-card">
+          <h3>Databases</h3>
+          <ul class="techstack-tags">
+            <li>PostgreSQL</li>
+            <li>Neon</li>
+            <li>pgvector</li>
+            <li>MySQL</li>
+            <li>Redis</li>
+            <li>Query Optimization</li>
+            <li>Indexing</li>
+          </ul>
+        </div>
+
+        <div class="techstack-card">
+          <h3>AI / ML</h3>
+          <ul class="techstack-tags">
+            <li>MCP Servers</li>
+            <li>RAG</li>
+            <li>Recommendation Systems</li>
+            <li>AI-Assisted Engineering</li>
+          </ul>
+        </div>
+
+        <div class="techstack-card">
+          <h3>DevOps &amp; Cloud</h3>
+          <ul class="techstack-tags">
+            <li>AWS</li>
+            <li>Huawei Cloud</li>
+            <li>Docker</li>
+            <li>Capistrano</li>
+            <li>GitHub Actions</li>
+            <li>Vercel</li>
+            <li>Supervisor</li>
+          </ul>
+        </div>
+
+        <div class="techstack-card">
+          <h3>Tools &amp; Collaboration</h3>
+          <ul class="techstack-tags">
+            <li>Notion</li>
+            <li>Jira</li>
+            <li>Slack</li>
+            <li>Lark</li>
+            <li>Figma</li>
+            <li>Loom</li>
+          </ul>
+        </div>
+
+        <div class="techstack-card techstack-card--note">
+          <h3>Proficient</h3>
+          <ul class="techstack-tags">
+            <li>Go</li>
+          </ul>
+          <p class="techstack-note">
+            Confident in personal projects &mdash; no professional experience
+            yet.
+          </p>
+        </div>
       </div>
     </section>
 
