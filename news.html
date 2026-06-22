@@ -185,23 +185,26 @@
           return a;
         }
 
-        // Build one pass: gold + USD stats (when available) then headlines.
+        function appendStats(frag) {
+          if (!state.stats) return;
+          frag.appendChild(
+            statLink(
+              "🪙 Emas Rp" + rupiah.format(state.stats.gold) + "/g",
+              "Harga emas per gram dalam IDR — sumber: metals.dev"
+            )
+          );
+          frag.appendChild(
+            statLink(
+              "💵 1 USD Rp" + rupiah.format(state.stats.usd),
+              "Kurs 1 USD ke IDR — sumber: metals.dev"
+            )
+          );
+        }
+
+        // Build one pass: headlines, with gold + USD stats after the 3rd.
         function buildSequence(frag) {
-          if (state.stats) {
-            frag.appendChild(
-              statLink(
-                "🪙 Emas Rp" + rupiah.format(state.stats.gold) + "/g",
-                "Harga emas per gram dalam IDR — sumber: metals.dev"
-              )
-            );
-            frag.appendChild(
-              statLink(
-                "💵 1 USD Rp" + rupiah.format(state.stats.usd),
-                "Kurs 1 USD ke IDR — sumber: metals.dev"
-              )
-            );
-          }
-          state.news.forEach(function (item) {
+          var statsDone = false;
+          state.news.forEach(function (item, i) {
             var a = document.createElement("a");
             a.className = "news-item";
             a.href = item.link;
@@ -209,7 +212,13 @@
             a.rel = "noopener";
             a.textContent = decode(item.title);
             frag.appendChild(a);
+            if (i === 2 && state.stats) {
+              appendStats(frag);
+              statsDone = true;
+            }
           });
+          // Fewer than 3 headlines (or none): still show the prices.
+          if (state.stats && !statsDone) appendStats(frag);
           // Source credit at the end of each cycle (only for sources shown).
           var src = document.createElement("span");
           src.className = "news-source";
