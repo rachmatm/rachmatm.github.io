@@ -61,7 +61,7 @@
         background-color: #eeece6;
         color-scheme: light dark;
         gap: 2rem;
-        padding-bottom: 60px;
+        padding-bottom: 92px;
       }
 
       .music-footer {
@@ -69,16 +69,24 @@
         bottom: 0;
         left: 0;
         right: 0;
-        height: 56px;
         z-index: 9999;
         border: none;
-        overflow: hidden;
+        display: flex;
+        flex-direction: column;
       }
 
       .music-footer iframe {
         width: 100%;
-        height: 100%;
         border: none;
+        display: block;
+      }
+
+      .news-frame {
+        height: 32px;
+      }
+
+      .radio-frame {
+        height: 56px;
       }
 
       @media (prefers-color-scheme: dark) {
@@ -914,7 +922,17 @@
     </section>
 
     <div class="music-footer">
-      <iframe src="music.html" allow="autoplay" title="Radio Player"></iframe>
+      <iframe
+        class="news-frame"
+        src="news.html"
+        title="Berita Liputan6"
+      ></iframe>
+      <iframe
+        class="radio-frame"
+        src="music.html"
+        allow="autoplay"
+        title="Radio Player"
+      ></iframe>
     </div>
   </body>
 </html>

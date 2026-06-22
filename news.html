@@ -1,0 +1,290 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Berita — Liputan6</title>
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css?family=Lato:900"
+    />
+    <style>
+      *,
+      *::before,
+      *::after {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      html,
+      body {
+        height: 100%;
+        overflow: hidden;
+        color-scheme: light dark;
+      }
+
+      /* Running news ticker — RSS source: Liputan6.com */
+      .news-ticker {
+        display: flex;
+        align-items: stretch;
+        height: 100%;
+        background: #fff;
+        border-top: 1px solid #e2ddd2;
+        font-family: "Lato", sans-serif;
+        overflow: hidden;
+      }
+
+      .news-viewport {
+        position: relative;
+        flex: 1 1 auto;
+        overflow: hidden;
+        display: flex;
+        align-items: center;
+      }
+
+      .news-track {
+        display: inline-flex;
+        align-items: center;
+        white-space: nowrap;
+        will-change: transform;
+        animation: news-scroll linear infinite;
+      }
+
+      .news-viewport:hover .news-track {
+        animation-play-state: paused;
+      }
+
+      @keyframes news-scroll {
+        from {
+          transform: translateX(0);
+        }
+        to {
+          transform: translateX(-50%);
+        }
+      }
+
+      .news-item {
+        display: inline-flex;
+        align-items: center;
+        color: #222;
+        text-decoration: none;
+        font-size: 13px;
+        padding: 0 18px;
+      }
+
+      .news-item:hover {
+        text-decoration: underline;
+      }
+
+      .news-item::before {
+        content: "•";
+        margin-right: 18px;
+        color: #ffeb3b;
+        font-weight: 900;
+      }
+
+      .news-stat {
+        display: inline-flex;
+        align-items: center;
+        margin: 0 6px;
+        padding: 3px 11px;
+        border-radius: 999px;
+        background: #faf6ea;
+        border: 1px solid #efe6cf;
+        color: #1a1a1a;
+        font-size: 12px;
+        font-weight: 700;
+        text-decoration: none;
+        white-space: nowrap;
+      }
+
+      .news-stat:hover {
+        border-color: #d9c98f;
+      }
+
+      .news-source {
+        display: inline-flex;
+        align-items: center;
+        gap: 4px;
+        padding: 0 18px;
+        font-size: 11px;
+        color: #999;
+        white-space: nowrap;
+      }
+
+      .news-source a {
+        color: #999;
+        text-decoration: none;
+      }
+
+      .news-source a:hover {
+        color: #ee2737;
+        text-decoration: underline;
+      }
+
+      @media (prefers-color-scheme: dark) {
+        .news-ticker {
+          background: #1b1b1b;
+          border-top-color: #2a2a2a;
+        }
+        .news-item {
+          color: #e8e8e8;
+        }
+        .news-stat {
+          background: #2a2620;
+          border-color: #3a342a;
+          color: #f0ead8;
+        }
+        .news-source,
+        .news-source a {
+          color: #8c8c8c;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="news-ticker" id="newsTicker" hidden>
+      <div class="news-viewport">
+        <div class="news-track" id="newsTrack"></div>
+      </div>
+    </div>
+
+    <script>
+      (function () {
+        var NEWS_FEED = "https://feed.liputan6.com/rss/news";
+        // RSS is fetched client-side via rss2json (the feed sends no CORS header).
+        var NEWS_ENDPOINT =
+          "https://api.rss2json.com/v1/api.json?rss_url=" +
+          encodeURIComponent(NEWS_FEED);
+        var METALS_ENDPOINT = "https://mcp-dev-knowledge.vercel.app/api/gold";
+        var NEWS_REFRESH_MS = 5 * 60 * 1000; // news: refetch every 5 minutes
+        var METALS_REFRESH_MS = 24 * 60 * 60 * 1000; // gold/USD: refetch next day
+
+        var ticker = document.getElementById("newsTicker");
+        var track = document.getElementById("newsTrack");
+        var state = { news: [], stats: null };
+        var rupiah = new Intl.NumberFormat("id-ID", {
+          maximumFractionDigits: 0,
+        });
+
+        function decode(str) {
+          var el = document.createElement("textarea");
+          el.innerHTML = str || "";
+          return el.value;
+        }
+
+        function statLink(text, title) {
+          var a = document.createElement("a");
+          a.className = "news-stat";
+          a.href = "https://metals.dev";
+          a.target = "_blank";
+          a.rel = "noopener";
+          a.title = title;
+          a.textContent = text;
+          return a;
+        }
+
+        // Build one pass: gold + USD stats (when available) then headlines.
+        function buildSequence(frag) {
+          if (state.stats) {
+            frag.appendChild(
+              statLink(
+                "🪙 Emas Rp" + rupiah.format(state.stats.gold) + "/g",
+                "Harga emas per gram dalam IDR — sumber: metals.dev"
+              )
+            );
+            frag.appendChild(
+              statLink(
+                "💵 1 USD Rp" + rupiah.format(state.stats.usd),
+                "Kurs 1 USD ke IDR — sumber: metals.dev"
+              )
+            );
+          }
+          state.news.forEach(function (item) {
+            var a = document.createElement("a");
+            a.className = "news-item";
+            a.href = item.link;
+            a.target = "_blank";
+            a.rel = "noopener";
+            a.textContent = decode(item.title);
+            frag.appendChild(a);
+          });
+          // Source credit at the end of each cycle (only for sources shown).
+          var src = document.createElement("span");
+          src.className = "news-source";
+          src.appendChild(document.createTextNode("Sumber: "));
+          if (state.news.length) {
+            src.appendChild(
+              sourceLink("https://www.liputan6.com", "Liputan6.com")
+            );
+          }
+          if (state.stats) {
+            if (state.news.length) src.appendChild(document.createTextNode(" · "));
+            src.appendChild(sourceLink("https://metals.dev", "metals.dev"));
+          }
+          frag.appendChild(src);
+        }
+
+        function sourceLink(href, text) {
+          var a = document.createElement("a");
+          a.href = href;
+          a.target = "_blank";
+          a.rel = "noopener";
+          a.textContent = text;
+          return a;
+        }
+
+        function rebuild() {
+          if (!state.news.length && !state.stats) return;
+          var frag = document.createDocumentFragment();
+          // Two identical halves => translateX(-50%) scrolls seamlessly.
+          buildSequence(frag);
+          buildSequence(frag);
+          track.innerHTML = "";
+          track.appendChild(frag);
+          var units = state.news.length + (state.stats ? 2 : 0);
+          track.style.animationDuration = Math.max(units * 4, 20) + "s";
+          ticker.hidden = false;
+        }
+
+        function loadNews() {
+          fetch(NEWS_ENDPOINT, { cache: "no-store" })
+            .then(function (r) {
+              return r.json();
+            })
+            .then(function (d) {
+              if (d && d.status === "ok" && d.items) {
+                state.news = d.items;
+                rebuild();
+              }
+            })
+            .catch(function () {
+              /* network/proxy hiccup — keep the last headlines */
+            });
+        }
+
+        function loadMetals() {
+          fetch(METALS_ENDPOINT, { cache: "no-store" })
+            .then(function (r) {
+              return r.json();
+            })
+            .then(function (d) {
+              if (d && d.status === "success" && d.metals && d.currencies) {
+                state.stats = { gold: d.metals.gold, usd: d.currencies.USD };
+                rebuild();
+              }
+            })
+            .catch(function () {
+              /* keep the last known prices */
+            });
+        }
+
+        loadNews();
+        loadMetals();
+        setInterval(loadNews, NEWS_REFRESH_MS);
+        setInterval(loadMetals, METALS_REFRESH_MS);
+      })();
+    </script>
+  </body>
+</html>
