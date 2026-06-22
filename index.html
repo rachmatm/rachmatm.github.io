@@ -322,7 +322,7 @@
 
       .techstack-grid {
         display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        grid-template-columns: repeat(auto-fill, minmax(440px, 1fr));
         gap: 1.25rem;
       }
 
@@ -363,11 +363,50 @@
         text-transform: uppercase;
       }
 
+      .techstack-list {
+        list-style: none;
+        display: flex;
+        flex-direction: column;
+        gap: 0.85rem;
+      }
+
+      .techstack-list li {
+        font-size: 0.85rem;
+        line-height: 1.45;
+        color: #333;
+      }
+
+      .techstack-list .tech-name {
+        display: inline-block;
+        font-family: "Lato", sans-serif;
+        font-weight: 900;
+        font-size: 0.78rem;
+        letter-spacing: 0.04rem;
+        text-transform: uppercase;
+        background: #ffcd28;
+        border: 2px solid #000;
+        border-radius: 6px;
+        padding: 0.15rem 0.55rem;
+        margin-bottom: 0.3rem;
+        color: #000;
+      }
+
+      .techstack-list .tech-desc {
+        display: block;
+        color: #333;
+      }
+
+      .techstack-summary {
+        font-size: 0.85rem;
+        line-height: 1.5;
+        color: #333;
+      }
+
       .techstack-card--note h3 {
         border-bottom-color: #f8012d;
       }
 
-      .techstack-card--note .techstack-tags li {
+      .techstack-card--note .tech-name {
         background: #fff;
       }
 
@@ -573,86 +612,85 @@
       <h2>Tech Stack &amp; Experience</h2>
       <div class="techstack-grid">
         <div class="techstack-card">
-          <h3>Backend &mdash; Core</h3>
-          <ul class="techstack-tags">
-            <li>Ruby on Rails (15 yoe)</li>
-            <li>PHP / Laravel</li>
-            <li>Node.js</li>
-            <li>TypeScript</li>
-            <li>Python</li>
-            <li>Sidekiq</li>
-            <li>Cron</li>
+          <h3>Professional / Core</h3>
+          <ul class="techstack-list">
+            <li>
+              <span class="tech-name">Ruby on Rails</span>
+              <span class="tech-desc"
+                >15 yoe; ActiveRecord, query optimization, indexing, Sidekiq
+                queues + cron.</span
+              >
+            </li>
+            <li>
+              <span class="tech-name">PHP / Laravel</span>
+              <span class="tech-desc"
+                >Bidding platform (primary stack) + multiple other projects;
+                queues &amp; schedulers.</span
+              >
+            </li>
+            <li>
+              <span class="tech-name">Node.js / TypeScript</span>
+              <span class="tech-desc"
+                >RTB engine, web crawling, bulk SMS pipelines, CLIs, MCP
+                servers, Next.js.</span
+              >
+            </li>
+            <li>
+              <span class="tech-name">Python</span>
+              <span class="tech-desc"
+                >ML / marketplace category recommendation.</span
+              >
+            </li>
           </ul>
         </div>
 
         <div class="techstack-card">
-          <h3>Frontend &amp; CMS</h3>
-          <ul class="techstack-tags">
-            <li>Next.js</li>
-            <li>React</li>
-            <li>HTML / CSS</li>
-            <li>v0</li>
-            <li>WordPress</li>
-            <li>Elementor</li>
-          </ul>
+          <h3>Frontend / CMS</h3>
+          <p class="techstack-summary">
+            Next.js / React, v0, HTML/CSS, WordPress &amp; Elementor.
+          </p>
         </div>
 
         <div class="techstack-card">
-          <h3>Databases</h3>
-          <ul class="techstack-tags">
-            <li>PostgreSQL</li>
-            <li>Neon</li>
-            <li>pgvector</li>
-            <li>MySQL</li>
-            <li>Redis</li>
-            <li>Query Optimization</li>
-            <li>Indexing</li>
-          </ul>
+          <h3>Database</h3>
+          <p class="techstack-summary">
+            PostgreSQL (Neon + pgvector), MySQL (legacy redesign &amp; query
+            optimization), indexing &amp; tuning.
+          </p>
+        </div>
+
+        <div class="techstack-card">
+          <h3>Infra Deps</h3>
+          <p class="techstack-summary">Redis (Sidekiq backend).</p>
         </div>
 
         <div class="techstack-card">
           <h3>AI / ML</h3>
-          <ul class="techstack-tags">
-            <li>MCP Servers</li>
-            <li>RAG</li>
-            <li>Recommendation Systems</li>
-            <li>AI-Assisted Engineering</li>
-          </ul>
+          <p class="techstack-summary">
+            MCP servers, RAG, recommendation models.
+          </p>
         </div>
 
         <div class="techstack-card">
-          <h3>DevOps &amp; Cloud</h3>
-          <ul class="techstack-tags">
-            <li>AWS</li>
-            <li>Huawei Cloud</li>
-            <li>Docker</li>
-            <li>Capistrano</li>
-            <li>GitHub Actions</li>
-            <li>Vercel</li>
-            <li>Supervisor</li>
-          </ul>
+          <h3>DevOps / Cloud</h3>
+          <p class="techstack-summary">
+            AWS &rarr; Huawei Cloud (cost-driven migration), Capistrano, Docker,
+            Vercel, GitHub Actions, Supervisor, cron.
+          </p>
         </div>
 
         <div class="techstack-card">
           <h3>Tools &amp; Collaboration</h3>
-          <ul class="techstack-tags">
-            <li>Notion</li>
-            <li>Jira</li>
-            <li>Slack</li>
-            <li>Lark</li>
-            <li>Figma</li>
-            <li>Loom</li>
-          </ul>
+          <p class="techstack-summary">
+            Notion, Jira, Slack, Lark, Figma, Loom.
+          </p>
         </div>
 
         <div class="techstack-card techstack-card--note">
-          <h3>Proficient</h3>
-          <ul class="techstack-tags">
-            <li>Go</li>
-          </ul>
-          <p class="techstack-note">
-            Confident in personal projects &mdash; no professional experience
-            yet.
+          <h3>Proficient (no pro experience yet)</h3>
+          <p class="techstack-summary">
+            <span class="tech-name">Go</span> &mdash; confident in personal
+            projects, no professional experience yet.
           </p>
         </div>
       </div>
