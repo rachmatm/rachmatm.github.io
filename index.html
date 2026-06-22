@@ -402,6 +402,20 @@
         color: #333;
       }
 
+      .tech-subgroup {
+        font-family: "Lato", sans-serif;
+        font-weight: 900;
+        font-size: 0.7rem;
+        letter-spacing: 0.1rem;
+        text-transform: uppercase;
+        color: #777;
+        margin: 0.25rem 0 0.85rem;
+      }
+
+      .techstack-list + .tech-subgroup {
+        margin-top: 1.25rem;
+      }
+
       .techstack-card--note h3 {
         border-bottom-color: #f8012d;
       }
@@ -613,6 +627,7 @@
       <div class="techstack-grid">
         <div class="techstack-card">
           <h3>Professional / Core</h3>
+          <p class="tech-subgroup">Languages &amp; Frameworks</p>
           <ul class="techstack-list">
             <li>
               <span class="tech-name">Ruby on Rails</span>
@@ -641,6 +656,9 @@
                 >ML / marketplace category recommendation.</span
               >
             </li>
+          </ul>
+          <p class="tech-subgroup">Data Stores</p>
+          <ul class="techstack-list">
             <li>
               <span class="tech-name">PostgreSQL</span>
               <span class="tech-desc"
@@ -657,8 +675,8 @@
             <li>
               <span class="tech-name">Redis</span>
               <span class="tech-desc"
-                >Temporary data storage (e.g. product view counters), later
-                exported to MySQL via scheduled jobs; also Sidekiq
+                >In-memory store for high-frequency data such as product view
+                counters, flushed to MySQL on a scheduled job; also Sidekiq
                 backend.</span
               >
             </li>
