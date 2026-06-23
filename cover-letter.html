@@ -49,8 +49,6 @@
 
         .letter__header {
             margin-bottom: 2.5rem;
-            padding-bottom: 2rem;
-            border-bottom: 1px solid #e5e5e5;
         }
 
         .letter__name {
@@ -70,7 +68,6 @@
         }
 
         .letter__date {
-            margin-bottom: 2rem;
             font-size: 0.9rem;
             color: #666;
         }
@@ -124,13 +121,6 @@
         .highlight {
             background: linear-gradient(180deg, transparent 60%, rgba(255, 235, 59, 0.3) 60%);
             padding: 0 2px;
-        }
-
-        .letter__tagline {
-            margin-top: 0.5rem;
-            font-style: italic;
-            font-size: 90%;
-            color: #666;
         }
 
         .letter__divider {
@@ -226,10 +216,9 @@
         <div class="letter__header">
             <div class="letter__name">Rachmat Maulana Saleh</div>
             <div class="letter__title">Building scalable systems, solving messy real-world problems</div>
-            <p class="letter__tagline">Sistem yang handal dan menjawab berbagai tantangan nyata & komplek</p>
+            <div class="letter__date" id="date"></div>
         </div>
 
-        <div class="letter__date" id="date"></div>
 
         <div class="letter__greeting" id="greeting">Dear Hiring Manager,</div>
 
@@ -251,7 +240,6 @@
 
         <div class="letter__divider"><span aria-label="Bahasa Indonesia" role="img" style="font-size: 1.6rem; line-height: 1;">🇮🇩</span></div>
 
-        <div class="letter__date" id="dateId"></div>
 
         <div class="letter__greeting" id="greetingId">Kepada Yth. Hiring Manager,</div>
 
@@ -305,7 +293,6 @@
             const now = new Date();
             const options = { year: 'numeric', month: 'long', day: 'numeric' };
             document.getElementById('date').textContent = now.toLocaleDateString('en-US', options);
-            document.getElementById('dateId').textContent = now.toLocaleDateString('id-ID', options);
 
             document.title = `Cover Letter - ${roleTitle} at ${companyName}`;
 
