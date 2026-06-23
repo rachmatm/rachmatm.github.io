@@ -70,7 +70,7 @@
         color: #222;
         text-decoration: none;
         font-size: 13px;
-        padding: 0 18px;
+        padding: 0 10px;
       }
 
       .news-item:hover {
@@ -204,21 +204,7 @@
         // Build one pass: headlines, with gold + USD stats after the 3rd.
         function buildSequence(frag) {
           var statsDone = false;
-          state.news.forEach(function (item, i) {
-            var a = document.createElement("a");
-            a.className = "news-item";
-            a.href = item.link;
-            a.target = "_blank";
-            a.rel = "noopener";
-            a.textContent = decode(item.title);
-            frag.appendChild(a);
-            if (i === 2 && state.stats) {
-              appendStats(frag);
-              statsDone = true;
-            }
-          });
-          // Fewer than 3 headlines (or none): still show the prices.
-          if (state.stats && !statsDone) appendStats(frag);
+          
           // Source credit at the end of each cycle (only for sources shown).
           var src = document.createElement("span");
           src.className = "news-source";
@@ -233,6 +219,22 @@
             src.appendChild(sourceLink("https://metals.dev", "metals.dev"));
           }
           frag.appendChild(src);
+
+          state.news.forEach(function (item, i) {
+            var a = document.createElement("a");
+            a.className = "news-item";
+            a.href = item.link;
+            a.target = "_blank";
+            a.rel = "noopener";
+            a.textContent = decode(item.title);
+            frag.appendChild(a);
+            if (i % 2 === 0 && state.stats) {
+              appendStats(frag);
+              statsDone = true;
+            }
+          });
+          // Fewer than 3 headlines (or none): still show the prices.
+          if (state.stats && !statsDone) appendStats(frag);
         }
 
         function sourceLink(href, text) {
