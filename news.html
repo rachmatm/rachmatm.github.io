@@ -282,7 +282,7 @@
             })
             .then(function (d) {
               if (d && d.status === "success" && d.metals && d.currencies) {
-                state.stats = { gold: d.metals.gold, usd: d.currencies.USD };
+                state.stats = { gold: d.idr_gold_price, usd: d.idr_usd_price };
                 rebuild();
               }
             })
