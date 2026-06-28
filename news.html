@@ -281,7 +281,7 @@
               return r.json();
             })
             .then(function (d) {
-              if (d && d.status === "success") {
+              if (d && d.idr_gold_price && d.idr_usd_price ) {
                 state.stats = { gold: d.idr_gold_price, usd: d.idr_usd_price };
                 rebuild();
               }
