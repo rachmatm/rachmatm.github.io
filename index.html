@@ -3,7 +3,41 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Rachmat Maulana Saleh</title>
+    <title>Rachmat Maulana Saleh — Full-Stack Engineer | Rails Laravel Node.js | Portfolio</title>
+    <meta
+      name="description"
+      content="Rachmat Maulana Saleh — Full-stack engineer (15 yoe Rails, Laravel, Node.js, TypeScript, Python) — bidding platform, RTB engine, ML. Portfolio, certifications and tech stack."
+    />
+    <link rel="canonical" href="https://rachmatm.github.io/" />
+    <meta name="robots" content="index, follow, max-image-preview:large" />
+    <meta name="theme-color" content="#ffcd28" />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:url" content="https://rachmatm.github.io/" />
+    <meta
+      property="og:title"
+      content="Rachmat Maulana Saleh — Full-Stack Engineer | Portfolio"
+    />
+    <meta
+      property="og:description"
+      content="Full-stack engineer portfolio — 15 yoe Rails, Laravel, Node.js. StockFlow, Sawit Drone, SnapSort and more."
+    />
+    <meta property="og:image" content="https://ik.imagekit.io/rewog/team.jpeg" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta
+      name="twitter:title"
+      content="Rachmat Maulana Saleh — Full-Stack Engineer | Portfolio"
+    />
+    <meta
+      name="twitter:description"
+      content="Full-stack engineer portfolio — 15 yoe Rails, Laravel, Node.js."
+    />
+    <meta name="twitter:image" content="https://ik.imagekit.io/rewog/team.jpeg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preconnect" href="https://ik.imagekit.io" />
     <link
       rel="apple-touch-icon"
       sizes="180x180"
@@ -36,9 +70,47 @@
     <link rel="shortcut icon" href="assets/favicon.ico" />
     <link
       rel="stylesheet"
-      href="https://fonts.googleapis.com/css?family=Dekko|Lato:900|Rock+Salt"
+      href="https://fonts.googleapis.com/css?family=Dekko|Lato:900|Rock+Salt&display=swap"
     />
+    <link
+      rel="stylesheet"
+      href="assets/vendor/grab-n-drag-infinite-carousel/grab-n-drag-infinite-carousel.min.css"
+    />
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "Rachmat Maulana Saleh",
+        "url": "https://rachmatm.github.io/",
+        "image": "https://ik.imagekit.io/rewog/team.jpeg",
+        "jobTitle": "Full-Stack Engineer",
+        "knowsAbout": [
+          "Ruby on Rails",
+          "Laravel",
+          "PHP",
+          "Node.js",
+          "TypeScript",
+          "Python",
+          "Next.js"
+        ],
+        "sameAs": [
+          "https://github.com/rachmatm",
+          "https://www.linkedin.com/in/rachmatm"
+        ]
+      }
+    </script>
     <style>
+      .sr-only {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        padding: 0;
+        margin: -1px;
+        overflow: hidden;
+        clip: rect(0, 0, 0, 0);
+        white-space: nowrap;
+        border: 0;
+      }
       *,
       *::before,
       *::after {
@@ -310,6 +382,150 @@
         }
       }
 
+      /* Certifications */
+      .certifications {
+        width: 100%;
+        max-width: 1000px;
+        padding: 0 1rem;
+        font-family:
+          -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      }
+
+      .certifications h2 {
+        text-align: center;
+        font-family: "Lato", sans-serif;
+        text-transform: uppercase;
+        letter-spacing: 0.15rem;
+        margin-bottom: 1.5rem;
+        color: #000;
+      }
+
+      @media (prefers-color-scheme: dark) {
+        .certifications h2 {
+          color: #fff;
+        }
+      }
+
+      /* Infinite carousels (vendored grab-n-drag library) */
+      .infinite-scroll-wrapper {
+        padding: 0.875rem 0 0.625rem;
+      }
+
+      .infinite-scroll-wrapper::before,
+      .infinite-scroll-wrapper::after {
+        display: none !important;
+        background: none !important;
+      }
+
+      .infinite-scroll-container {
+        align-items: stretch;
+        touch-action: pan-y;
+      }
+
+      .infinite-scroll-item {
+        margin-right: 1.25rem;
+      }
+
+      /* Portfolio shows 3 cards at a time (responsive) */
+      .portfolio .infinite-scroll-container {
+        gap: 1.25rem;
+        white-space: normal;
+      }
+
+      .portfolio .infinite-scroll-item {
+        margin-right: 0;
+      }
+
+      .cert-card {
+        position: relative;
+        flex: 0 0 320px;
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+        white-space: normal;
+        overflow: hidden;
+        background: #ffcd28;
+        border: 3px solid #000;
+        border-radius: 0;
+        color: #000;
+        text-decoration: none;
+        transition:
+          transform 0.2s ease,
+          box-shadow 0.2s ease;
+      }
+
+      .cert-card:hover,
+      .cert-card:focus-visible {
+        transform: translateY(-4px);
+        box-shadow: 6px 6px 0 #000;
+        outline: none;
+      }
+
+      .card-index {
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: 2;
+        min-width: 2.15rem;
+        height: 2.15rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: #000;
+        border: 3px solid #000;
+        border-top: none;
+        border-left: none;
+        border-radius: 0;
+        font-family: "Lato", sans-serif;
+        font-weight: 900;
+        font-size: 1rem;
+        color: #ffcd28;
+      }
+
+      .card-index--right {
+        left: auto;
+        right: 0;
+        border: 3px solid #000;
+        border-top: none;
+        border-right: none;
+        border-left: 3px solid #000;
+        border-radius: 0;
+      }
+
+      .cert-thumb {
+        display: block;
+        width: 100%;
+        height: auto;
+        border-bottom: 3px solid #000;
+        background: #ffcd28;
+      }
+
+      .cert-body {
+        display: flex;
+        flex-direction: column;
+        flex: 1;
+        gap: 0.35rem;
+        padding: 0.85rem 1rem 1rem;
+      }
+
+      .cert-body h3 {
+        font-family: "Lato", sans-serif;
+        font-weight: 900;
+        font-size: 0.85rem;
+        line-height: 1.3;
+        margin-bottom: 0.35rem;
+        color: #000;
+      }
+
+      .cert-meta {
+        font-family: "Lato", sans-serif;
+        font-weight: 900;
+        font-size: 0.7rem;
+        letter-spacing: 0.06rem;
+        text-transform: uppercase;
+        color: #000;
+      }
+
       /* Tech Stack / Skills & Experience */
       .techstack {
         width: 100%;
@@ -484,23 +700,37 @@
         }
       }
 
-      .portfolio-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-        gap: 1.25rem;
-      }
-
       .portfolio-card {
+        position: relative;
+        flex: 0 0 310px;
         display: flex;
         flex-direction: column;
-        background: #fff;
+        align-items: stretch;
+        white-space: normal;
+        background: #ffcd28;
         border: 3px solid #000;
         border-radius: 8px;
         padding: 1.25rem;
         color: #000;
+        transition:
+          transform 0.2s ease,
+          box-shadow 0.2s ease;
+      }
+
+      @media (max-width: 900px) {
+        .portfolio-card {
+          flex-basis: 360px;
+        }
+      }
+
+      @media (max-width: 600px) {
+        .portfolio-card {
+          flex-basis: calc(100vw - 2rem);
+        }
       }
 
       .portfolio-card h3 {
+        padding-right: 2.5rem;
         margin-bottom: 0.5rem;
         font-family: "Lato", sans-serif;
         font-size: 1.1rem;
@@ -509,7 +739,12 @@
       .portfolio-card p {
         font-size: 0.9rem;
         line-height: 1.45;
-        color: #333;
+        color: #000;
+      }
+
+      .portfolio-card:hover {
+        transform: translateY(-4px);
+        box-shadow: 6px 6px 0 #000;
       }
 
       .portfolio-actions {
@@ -575,8 +810,19 @@
   </head>
 
   <body>
+    <h1 class="sr-only">
+      Rachmat Maulana Saleh — Full-Stack Engineer | Ruby on Rails Laravel Node.js
+    </h1>
     <div class="photo-wrapper">
-      <img src="team.jpeg" alt="Team" />
+      <img
+        src="https://ik.imagekit.io/rewog/team.jpeg"
+        alt="Rachmat Maulana Saleh — Full-Stack Engineer portrait"
+        width="600"
+        height="600"
+        loading="eager"
+        decoding="async"
+        fetchpriority="high"
+      />
 
       <!-- Name tag -->
       <div class="tag">
@@ -643,8 +889,338 @@
       </div>
     </section>
 
-    <section class="techstack">
-      <h2>Tech Stack &amp; Experience</h2>
+    
+
+    <section class="portfolio" aria-labelledby="portfolio-heading">
+      <h2 id="portfolio-heading">My Portfolio</h2>
+      <div class="infinite-scroll-wrapper">
+        <div class="infinite-scroll-container" id="portfolio-carousel">
+        <div class="portfolio-card infinite-scroll-item">
+          <span class="card-index card-index--right">1</span>
+          <h3>StockFlow</h3>
+          <p>
+            Demo application showcasing the order lifecycle with stock
+            reservation, payment SLA, automatic stock release, invoice
+            fulfillment, and multi-warehouse stock handling.
+          </p>
+          <div class="portfolio-actions">
+            <a
+              class="portfolio-btn"
+              href="https://github.com/rachmatm/stockflow"
+              target="_blank"
+              rel="noopener"
+              >GitHub</a
+            >
+            <a
+              class="portfolio-btn"
+              href="https://demo.rachmat.pro"
+              target="_blank"
+              rel="noopener"
+              >Demo</a
+            >
+          </div>
+        </div>
+        <div class="portfolio-card infinite-scroll-item">
+          <span class="card-index card-index--right">2</span>
+          <h3>Sawit Drone</h3>
+          <p>
+            A Go backend service for managing palm oil estate tree inventories
+            and calculating optimal drone survey flight paths using a
+            boustrophedon (snake) pattern, with distance-aware routing for
+            battery management. API-first design with OpenAPI spec and
+            repository pattern.
+          </p>
+          <div class="portfolio-actions">
+            <a
+              class="portfolio-btn"
+              href="https://github.com/rachmatm/sawit-drone"
+              target="_blank"
+              rel="noopener"
+              >GitHub</a
+            >
+            <a
+              class="portfolio-btn"
+              href="https://karen-umber-psi.vercel.app/docs"
+              target="_blank"
+              rel="noopener"
+              >Demo</a
+            >
+          </div>
+        </div>
+        <div class="portfolio-card infinite-scroll-item">
+          <span class="card-index card-index--right">3</span>
+          <h3>SnapSort</h3>
+          <p>
+            An AI-powered tool for online marketplace sellers — upload a
+            product photo and get a suggested category (Electronics, Fashion,
+            Books, etc.) along with an image quality report for resolution,
+            sharpness, and watermark density.
+          </p>
+          <div class="portfolio-actions">
+            <a
+              class="portfolio-btn"
+              href="https://github.com/rachmatm/SnapSort"
+              target="_blank"
+              rel="noopener"
+              >GitHub</a
+            >
+            <a
+              class="portfolio-btn"
+              href="https://huggingface.co/spaces/rachmatm/snapshort"
+              target="_blank"
+              rel="noopener"
+              >Demo</a
+            >
+          </div>
+        </div>
+        <div class="portfolio-card infinite-scroll-item">
+          <span class="card-index card-index--right">4</span>
+          <h3>Car Background Replacer</h3>
+          <p>
+            A client-side web app that uses AI to remove car photo backgrounds
+            and replace license plates. All processing runs in the browser — no
+            server, no uploads — leveraging ONNX models via Transformers.js for
+            background removal and plate detection.
+          </p>
+          <div class="portfolio-actions">
+            <a
+              class="portfolio-btn"
+              href="https://github.com/rachmatm/carmb"
+              target="_blank"
+              rel="noopener"
+              >GitHub</a
+            >
+            <a
+              class="portfolio-btn"
+              href="https://carmb.vercel.app/"
+              target="_blank"
+              rel="noopener"
+              >Demo</a
+            >
+          </div>
+        </div>
+        <div class="portfolio-card infinite-scroll-item">
+          <span class="card-index card-index--right">5</span>
+          <h3>Sturdy Doodle</h3>
+          <p>
+            An AI-powered web app that lets small-business owners generate,
+            save, and refine logo concepts, with pluggable local or cloud
+            storage for any host.
+          </p>
+          <div class="portfolio-actions">
+            <a
+              class="portfolio-btn"
+              href="https://github.com/rachmatm/sturdy-doodle"
+              target="_blank"
+              rel="noopener"
+              >GitHub</a
+            >
+            <a
+              class="portfolio-btn"
+              href="https://rchmt-porto1.vercel.app/"
+              target="_blank"
+              rel="noopener"
+              >Demo</a
+            >
+          </div>
+        </div>
+        <div class="portfolio-card infinite-scroll-item">
+          <span class="card-index card-index--right">6</span>
+          <h3>Web Study Companion</h3>
+          <p>
+            A web-based study companion app built with Next.js, bootstrapped
+            with v0 and continuously deployed to Vercel on every merge to main.
+          </p>
+          <div class="portfolio-actions">
+            <a
+              class="portfolio-btn"
+              href="https://github.com/rachmatm/v0-web-study-companion"
+              target="_blank"
+              rel="noopener"
+              >GitHub</a
+            >
+            <a
+              class="portfolio-btn"
+              href="https://v0-web-study-companion.vercel.app/"
+              target="_blank"
+              rel="noopener"
+              >Demo</a
+            >
+          </div>
+        </div>
+        <div class="portfolio-card infinite-scroll-item">
+          <span class="card-index card-index--right">7</span>
+          <h3>Fullstack SDET Case Study</h3>
+          <p>
+            A full-stack software development engineer in test case study
+            showcasing practical testing workflows, automation, and product
+            validation across the stack.
+          </p>
+          <div class="portfolio-actions">
+            <a
+              class="portfolio-btn"
+              href="https://github.com/rachmatm/fullstack-sdet-case-study"
+              target="_blank"
+              rel="noopener"
+              >GitHub</a
+            >
+          </div>
+        </div>
+        <div class="portfolio-card infinite-scroll-item">
+          <span class="card-index card-index--right">8</span>
+          <h3>Argus Stream</h3>
+          <p>
+            A desktop app for real-time object detection on live HLS video
+            streams using YOLOv8. Built with a multi-process pipeline (Go + Wails
+            shell, Python subprocess for inference, ffmpeg for decoding) streaming
+            annotated frames to the frontend over WebSocket.
+          </p>
+          <div class="portfolio-actions">
+            <a
+              class="portfolio-btn"
+              href="https://github.com/rachmatm/argus-stream"
+              target="_blank"
+              rel="noopener"
+              >GitHub</a
+            >
+          </div>
+        </div>
+        <div class="portfolio-card infinite-scroll-item">
+          <span class="card-index card-index--right">9</span>
+          <h3>MCP Dev Knowledge</h3>
+          <p>
+            A curated, multi-stack RAG knowledge base for coding agents,
+            shipping as a Next.js MCP server on Vercel that exposes four tools
+            to query a tech-stack-partitioned store in Neon Postgres with
+            pgvector.
+          </p>
+          <div class="portfolio-actions">
+            <a
+              class="portfolio-btn"
+              href="https://github.com/rachmatm/mcp-dev-knowledge"
+              target="_blank"
+              rel="noopener"
+              >GitHub</a
+            >
+          </div>
+        </div>
+        <div class="portfolio-card infinite-scroll-item">
+          <span class="card-index card-index--right">10</span>
+          <h3>Bash Snippets</h3>
+          <p>
+            A curated collection of modular Bash snippets, aliases, and
+            functions to optimize terminal workflows, featuring a master loader
+            that auto-sources scripts organized into prompt, aliases,
+            automation, and ssh folders.
+          </p>
+          <div class="portfolio-actions">
+            <a
+              class="portfolio-btn"
+              href="https://github.com/rachmatm/bash-snippets"
+              target="_blank"
+              rel="noopener"
+              >GitHub</a
+            >
+          </div>
+        </div>
+        <div class="portfolio-card infinite-scroll-item">
+          <span class="card-index card-index--right">11</span>
+          <h3>Service Center Simulation</h3>
+          <p>
+            A TypeScript CLI simulating a smartphone service center where two
+            technicians repair phones from a customer queue, built with
+            Hexagonal Architecture and recursion.
+          </p>
+          <div class="portfolio-actions">
+            <a
+              class="portfolio-btn"
+              href="https://github.com/rachmatm/service-center-simulation"
+              target="_blank"
+              rel="noopener"
+              >GitHub</a
+            >
+          </div>
+        </div>
+        <div class="portfolio-card infinite-scroll-item">
+          <span class="card-index card-index--right">12</span>
+          <h3>ATM CLI Challenge</h3>
+          <p>
+            An interactive TypeScript CLI that simulates an ATM connected to a
+            retail bank, modeling customers, balances, debt tracking, and
+            automatic debt settlement entirely in memory.
+          </p>
+          <div class="portfolio-actions">
+            <a
+              class="portfolio-btn"
+              href="https://github.com/rachmatm/challenge-atm-cli"
+              target="_blank"
+              rel="noopener"
+              >GitHub</a
+            >
+          </div>
+        </div>
+        <div class="portfolio-card infinite-scroll-item">
+          <span class="card-index card-index--right">13</span>
+          <h3>Project Management</h3>
+          <p>
+            Translating stakeholder goals into actionable delivery plans;
+            from requirement gathering and scope definition through time
+            and cost estimation to resource allocation; ensuring projects
+            ship on time and within budget.
+          </p>
+          <div class="portfolio-actions">
+            <a
+              class="portfolio-btn"
+              href="https://melon-giant-2ad.notion.site/Daftar-Proposal-387028eff0ee8113a22ae88fa945efa0?pvs=74"
+              target="_blank"
+              rel="noopener"
+              >Bid Library</a
+            >
+          </div>
+        </div>
+        <div class="portfolio-card infinite-scroll-item">
+          <span class="card-index card-index--right">14</span>
+          <h3>Ubuntu Clipboard Manager</h3>
+          <p>
+            An Electron.js desktop clipboard manager for Ubuntu featuring
+            clipboard history, custom tabs, pinning, search, and a premium dark
+            glassmorphism UI.
+          </p>
+          <div class="portfolio-actions">
+            <a
+              class="portfolio-btn"
+              href="https://github.com/rachmatm/ubuntu-clipboard-manager"
+              target="_blank"
+              rel="noopener"
+              >GitHub</a
+            >
+          </div>
+        </div>
+        <div class="portfolio-card infinite-scroll-item">
+          <span class="card-index card-index--right">15</span>
+          <h3>Docker Images</h3>
+          <p>
+            A collection of custom Dockerfiles for PHP, Node.js, Ruby, and
+            Composer toolchains, most bundling Supervisor to run long-lived
+            processes like queues and schedulers.
+          </p>
+          <div class="portfolio-actions">
+            <a
+              class="portfolio-btn"
+              href="https://github.com/rachmatm/docker"
+              target="_blank"
+              rel="noopener"
+              >GitHub</a
+            >
+          </div>
+        </div>
+      </div>
+      </div>
+      </div>
+    </section>
+
+    <section class="techstack" aria-labelledby="techstack-heading">
+      <h2 id="techstack-heading">Tech Stack &amp; Experience</h2>
       <div class="techstack-grid">
         <div class="techstack-card">
           <h3>Professional / Core</h3>
@@ -746,328 +1322,135 @@
       </div>
     </section>
 
-    <section class="portfolio">
-      <h2>My Portfolio</h2>
-      <div class="portfolio-grid">
-        <div class="portfolio-card">
-          <h3>StockFlow</h3>
-          <p>
-            Demo application showcasing the order lifecycle with stock
-            reservation, payment SLA, automatic stock release, invoice
-            fulfillment, and multi-warehouse stock handling.
-          </p>
-          <div class="portfolio-actions">
-            <a
-              class="portfolio-btn"
-              href="https://github.com/rachmatm/stockflow"
-              target="_blank"
-              rel="noopener"
-              >GitHub</a
-            >
-            <a
-              class="portfolio-btn"
-              href="https://demo.rachmat.pro"
-              target="_blank"
-              rel="noopener"
-              >Demo</a
-            >
+<section class="certifications" aria-labelledby="certifications-heading">
+      <h2 id="certifications-heading">Certifications</h2>
+      <div class="infinite-scroll-wrapper">
+        <div class="infinite-scroll-container" id="cert-carousel">
+          <div class="cert-card infinite-scroll-item">
+            <span class="card-index">1</span>
+            <img
+              class="cert-thumb"
+              src="https://ik.imagekit.io/rewog/coursera-maximize-productivity-with-ai-tools.jpeg"
+              alt="Coursera certificate: Maximize Productivity With AI Tools by Google"
+              width="760"
+              height="398"
+              loading="lazy"
+              decoding="async"
+            />
+            <div class="cert-body">
+              <h3>Maximize Productivity With AI Tools</h3>
+              <p class="cert-meta">Google &middot; Coursera</p>
+              <div class="portfolio-actions">
+                <a
+                  class="portfolio-btn"
+                  href="https://www.coursera.org/account/accomplishments/verify/Y6057UJQADHD"
+                  target="_blank"
+                  rel="noopener"
+                  >Verify</a
+                >
+              </div>
+            </div>
           </div>
-        </div>
-        <div class="portfolio-card">
-          <h3>Sawit Drone</h3>
-          <p>
-            A Go backend service for managing palm oil estate tree inventories
-            and calculating optimal drone survey flight paths using a
-            boustrophedon (snake) pattern, with distance-aware routing for
-            battery management. API-first design with OpenAPI spec and
-            repository pattern.
-          </p>
-          <div class="portfolio-actions">
-            <a
-              class="portfolio-btn"
-              href="https://github.com/rachmatm/sawit-drone"
-              target="_blank"
-              rel="noopener"
-              >GitHub</a
-            >
-            <a
-              class="portfolio-btn"
-              href="https://karen-umber-psi.vercel.app/docs"
-              target="_blank"
-              rel="noopener"
-              >Demo</a
-            >
-          </div>
-        </div>
-        <div class="portfolio-card">
-          <h3>SnapSort</h3>
-          <p>
-            An AI-powered tool for online marketplace sellers — upload a
-            product photo and get a suggested category (Electronics, Fashion,
-            Books, etc.) along with an image quality report for resolution,
-            sharpness, and watermark density.
-          </p>
-          <div class="portfolio-actions">
-            <a
-              class="portfolio-btn"
-              href="https://github.com/rachmatm/SnapSort"
-              target="_blank"
-              rel="noopener"
-              >GitHub</a
-            >
-            <a
-              class="portfolio-btn"
-              href="https://huggingface.co/spaces/rachmatm/snapshort"
-              target="_blank"
-              rel="noopener"
-              >Demo</a
-            >
-          </div>
-        </div>
-        <div class="portfolio-card">
-          <h3>Car Background Replacer</h3>
-          <p>
-            A client-side web app that uses AI to remove car photo backgrounds
-            and replace license plates. All processing runs in the browser — no
-            server, no uploads — leveraging ONNX models via Transformers.js for
-            background removal and plate detection.
-          </p>
-          <div class="portfolio-actions">
-            <a
-              class="portfolio-btn"
-              href="https://github.com/rachmatm/carmb"
-              target="_blank"
-              rel="noopener"
-              >GitHub</a
-            >
-            <a
-              class="portfolio-btn"
-              href="https://carmb.vercel.app/"
-              target="_blank"
-              rel="noopener"
-              >Demo</a
-            >
-          </div>
-        </div>
-        <div class="portfolio-card">
-          <h3>Sturdy Doodle</h3>
-          <p>
-            An AI-powered web app that lets small-business owners generate,
-            save, and refine logo concepts, with pluggable local or cloud
-            storage for any host.
-          </p>
-          <div class="portfolio-actions">
-            <a
-              class="portfolio-btn"
-              href="https://github.com/rachmatm/sturdy-doodle"
-              target="_blank"
-              rel="noopener"
-              >GitHub</a
-            >
-            <a
-              class="portfolio-btn"
-              href="https://rchmt-porto1.vercel.app/"
-              target="_blank"
-              rel="noopener"
-              >Demo</a
-            >
-          </div>
-        </div>
-        <div class="portfolio-card">
-          <h3>Web Study Companion</h3>
-          <p>
-            A web-based study companion app built with Next.js, bootstrapped
-            with v0 and continuously deployed to Vercel on every merge to main.
-          </p>
-          <div class="portfolio-actions">
-            <a
-              class="portfolio-btn"
-              href="https://github.com/rachmatm/v0-web-study-companion"
-              target="_blank"
-              rel="noopener"
-              >GitHub</a
-            >
-            <a
-              class="portfolio-btn"
-              href="https://v0-web-study-companion.vercel.app/"
-              target="_blank"
-              rel="noopener"
-              >Demo</a
-            >
-          </div>
-        </div>
-        <div class="portfolio-card">
-          <h3>Fullstack SDET Case Study</h3>
-          <p>
-            A full-stack software development engineer in test case study
-            showcasing practical testing workflows, automation, and product
-            validation across the stack.
-          </p>
-          <div class="portfolio-actions">
-            <a
-              class="portfolio-btn"
-              href="https://github.com/rachmatm/fullstack-sdet-case-study"
-              target="_blank"
-              rel="noopener"
-              >GitHub</a
-            >
-          </div>
-        </div>
-        <div class="portfolio-card">
-          <h3>Argus Stream</h3>
-          <p>
-            A desktop app for real-time object detection on live HLS video
-            streams using YOLOv8. Built with a multi-process pipeline (Go + Wails
-            shell, Python subprocess for inference, ffmpeg for decoding) streaming
-            annotated frames to the frontend over WebSocket.
-          </p>
-          <div class="portfolio-actions">
-            <a
-              class="portfolio-btn"
-              href="https://github.com/rachmatm/argus-stream"
-              target="_blank"
-              rel="noopener"
-              >GitHub</a
-            >
-          </div>
-        </div>
-        <div class="portfolio-card">
-          <h3>MCP Dev Knowledge</h3>
-          <p>
-            A curated, multi-stack RAG knowledge base for coding agents,
-            shipping as a Next.js MCP server on Vercel that exposes four tools
-            to query a tech-stack-partitioned store in Neon Postgres with
-            pgvector.
-          </p>
-          <div class="portfolio-actions">
-            <a
-              class="portfolio-btn"
-              href="https://github.com/rachmatm/mcp-dev-knowledge"
-              target="_blank"
-              rel="noopener"
-              >GitHub</a
-            >
-          </div>
-        </div>
-        <div class="portfolio-card">
-          <h3>Bash Snippets</h3>
-          <p>
-            A curated collection of modular Bash snippets, aliases, and
-            functions to optimize terminal workflows, featuring a master loader
-            that auto-sources scripts organized into prompt, aliases,
-            automation, and ssh folders.
-          </p>
-          <div class="portfolio-actions">
-            <a
-              class="portfolio-btn"
-              href="https://github.com/rachmatm/bash-snippets"
-              target="_blank"
-              rel="noopener"
-              >GitHub</a
-            >
-          </div>
-        </div>
-        <div class="portfolio-card">
-          <h3>Service Center Simulation</h3>
-          <p>
-            A TypeScript CLI simulating a smartphone service center where two
-            technicians repair phones from a customer queue, built with
-            Hexagonal Architecture and recursion.
-          </p>
-          <div class="portfolio-actions">
-            <a
-              class="portfolio-btn"
-              href="https://github.com/rachmatm/service-center-simulation"
-              target="_blank"
-              rel="noopener"
-              >GitHub</a
-            >
-          </div>
-        </div>
-        <div class="portfolio-card">
-          <h3>ATM CLI Challenge</h3>
-          <p>
-            An interactive TypeScript CLI that simulates an ATM connected to a
-            retail bank, modeling customers, balances, debt tracking, and
-            automatic debt settlement entirely in memory.
-          </p>
-          <div class="portfolio-actions">
-            <a
-              class="portfolio-btn"
-              href="https://github.com/rachmatm/challenge-atm-cli"
-              target="_blank"
-              rel="noopener"
-              >GitHub</a
-            >
-          </div>
-        </div>
-        <div class="portfolio-card">
-          <h3>Project Management</h3>
-          <p>
-            Translating stakeholder goals into actionable delivery plans;
-            from requirement gathering and scope definition through time
-            and cost estimation to resource allocation; ensuring projects
-            ship on time and within budget.
-          </p>
-          <div class="portfolio-actions">
-            <a
-              class="portfolio-btn"
-              href="https://melon-giant-2ad.notion.site/Daftar-Proposal-387028eff0ee8113a22ae88fa945efa0?pvs=74"
-              target="_blank"
-              rel="noopener"
-              >Bid Library</a
-            >
-          </div>
-        </div>
-        <div class="portfolio-card">
-          <h3>Ubuntu Clipboard Manager</h3>
-          <p>
-            An Electron.js desktop clipboard manager for Ubuntu featuring
-            clipboard history, custom tabs, pinning, search, and a premium dark
-            glassmorphism UI.
-          </p>
-          <div class="portfolio-actions">
-            <a
-              class="portfolio-btn"
-              href="https://github.com/rachmatm/ubuntu-clipboard-manager"
-              target="_blank"
-              rel="noopener"
-              >GitHub</a
-            >
-          </div>
-        </div>
-        <div class="portfolio-card">
-          <h3>Docker Images</h3>
-          <p>
-            A collection of custom Dockerfiles for PHP, Node.js, Ruby, and
-            Composer toolchains, most bundling Supervisor to run long-lived
-            processes like queues and schedulers.
-          </p>
-          <div class="portfolio-actions">
-            <a
-              class="portfolio-btn"
-              href="https://github.com/rachmatm/docker"
-              target="_blank"
-              rel="noopener"
-              >GitHub</a
-            >
+          <div class="cert-card infinite-scroll-item">
+            <span class="card-index">2</span>
+            <img
+              class="cert-thumb"
+              src="https://ik.imagekit.io/rewog/coursera-introduction-to-ai.jpeg"
+              alt="Coursera certificate: Introduction to AI by Google"
+              width="760"
+              height="398"
+              loading="lazy"
+              decoding="async"
+            />
+            <div class="cert-body">
+              <h3>Introduction to AI</h3>
+              <p class="cert-meta">Google &middot; Coursera</p>
+              <div class="portfolio-actions">
+                <a
+                  class="portfolio-btn"
+                  href="https://www.coursera.org/account/accomplishments/verify/9D0NFHG0V1L2"
+                  target="_blank"
+                  rel="noopener"
+                  >Verify</a
+                >
+              </div>
+            </div>
           </div>
         </div>
       </div>
     </section>
+
+    
 
     <div class="music-footer">
       <iframe
         class="news-frame"
         src="news.html"
         title="Berita Liputan6"
+        loading="lazy"
       ></iframe>
       <iframe
         class="radio-frame"
         src="music.html"
         allow="autoplay"
         title="Radio Player"
+        loading="lazy"
       ></iframe>
     </div>
+    <script src="assets/vendor/grab-n-drag-infinite-carousel/grab-n-drag-infinite-carousel.min.js"></script>
+    <script>
+      (function () {
+        if (typeof InfiniteScrollCarousel === "undefined") return;
+        var LIGHT = "#eeece6";
+        var DARK = "#121212";
+        function currentFade() {
+          return window.matchMedia("(prefers-color-scheme: dark)").matches ? DARK : LIGHT;
+        }
+        var speed = 50;
+        function markClones(carousel) {
+          var n = carousel.originalItemCount;
+          var items = carousel.container.children;
+          for (var i = n; i < items.length; i++) {
+            var clone = items[i];
+            clone.setAttribute("aria-hidden", "true");
+            var links = clone.querySelectorAll("a");
+            for (var j = 0; j < links.length; j++) links[j].setAttribute("tabindex", "-1");
+            var imgs = clone.querySelectorAll("img");
+            for (var k = 0; k < imgs.length; k++) imgs[k].setAttribute("alt", "");
+          }
+        }
+        var carousels = [];
+        function make(id, reverse) {
+          var el = document.querySelector(id);
+          if (!el) return null;
+          var c = new InfiniteScrollCarousel(el, {
+            speed: speed,
+            reverseDirection: !!reverse,
+            pauseOnHover: true,
+            fadeColor: currentFade(),
+            fadeWidth: 60,
+            copies: 3,
+            onReady: function (carousel) {
+              var target = carousel || this;
+              if (target && target.originalItemCount) markClones(target);
+            },
+          });
+          // fallback if onReady already fired synchronously
+          if (c.originalItemCount) markClones(c);
+          return c;
+        }
+        var cert = make("#cert-carousel", false);
+        var portfolio = make("#portfolio-carousel", false);
+        if (cert) carousels.push(cert);
+        if (portfolio) carousels.push(portfolio);
+        var darkMq = window.matchMedia("(prefers-color-scheme: dark)");
+        var onTheme = function () {
+          var f = currentFade();
+          for (var i = 0; i < carousels.length; i++) carousels[i].setFadeColor(f);
+        };
+        if (darkMq.addEventListener) darkMq.addEventListener("change", onTheme);
+        else if (darkMq.addListener) darkMq.addListener(onTheme);
+      })();
+    </script>
   </body>
 </html>
