@@ -1399,7 +1399,7 @@
         function currentFade() {
           return window.matchMedia("(prefers-color-scheme: dark)").matches ? DARK : LIGHT;
         }
-        var speed = 0;
+        var speed = 50;
         function markClones(carousel) {
           var n = carousel.originalItemCount;
           var items = carousel.container.children;
@@ -1426,7 +1426,6 @@
             onReady: function (carousel) {
               var target = carousel || this;
               if (target && target.originalItemCount) markClones(target);
-              if (target && target.pause) target.pause();
             },
           });
           // fallback if onReady already fired synchronously
@@ -1435,8 +1434,8 @@
         }
         var cert = make("#cert-carousel", false);
         var portfolio = make("#portfolio-carousel", false);
-        if (cert) { carousels.push(cert); cert.pause(); }
-        if (portfolio) { carousels.push(portfolio); portfolio.pause(); }
+        if (cert) carousels.push(cert);
+        if (portfolio) carousels.push(portfolio);
         var darkMq = window.matchMedia("(prefers-color-scheme: dark)");
         var onTheme = function () {
           var f = currentFade();
