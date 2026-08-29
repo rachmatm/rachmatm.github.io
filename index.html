@@ -702,7 +702,7 @@
 
       .portfolio-card {
         position: relative;
-        flex: 0 0 310px;
+        flex: 0 0 80vw;
         display: flex;
         flex-direction: column;
         align-items: stretch;
@@ -715,18 +715,6 @@
         transition:
           transform 0.2s ease,
           box-shadow 0.2s ease;
-      }
-
-      @media (max-width: 900px) {
-        .portfolio-card {
-          flex-basis: 360px;
-        }
-      }
-
-      @media (max-width: 600px) {
-        .portfolio-card {
-          flex-basis: calc(100vw - 2rem);
-        }
       }
 
       .portfolio-card h3 {
@@ -1450,12 +1438,22 @@
         if (darkMq.addEventListener) darkMq.addEventListener("change", onTheme);
         else if (darkMq.addListener) darkMq.addListener(onTheme);
 
-        // Prevent the carousel's touchstart handler from calling preventDefault
-        // when the user taps a button/link, which would block the click on mobile.
-        document.querySelectorAll(".portfolio-btn").forEach(function (btn) {
-          btn.addEventListener("touchstart", function (e) {
-            e.stopPropagation();
-          }, { passive: true });
+        // Intercept mousedown and touchstart on carousel containers with capture
+        // so events originating from a .portfolio-btn never reach the vendor drag
+        // handler. This prevents the library from treating a button click as a
+        // drag, which would suppress the resulting click event.
+        [
+          document.querySelector("#portfolio-carousel"),
+          document.querySelector("#cert-carousel"),
+        ].forEach(function (container) {
+          if (!container) return;
+          function blockDragOnBtn(e) {
+            if (e.target.closest(".portfolio-btn, .portfolio-actions")) {
+              e.stopPropagation();
+            }
+          }
+          container.addEventListener("mousedown",  blockDragOnBtn, true);
+          container.addEventListener("touchstart", blockDragOnBtn, { capture: true, passive: true });
         });
       })();
     </script>
