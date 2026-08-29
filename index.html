@@ -1448,6 +1448,14 @@
         };
         if (darkMq.addEventListener) darkMq.addEventListener("change", onTheme);
         else if (darkMq.addListener) darkMq.addListener(onTheme);
+
+        // Prevent the carousel's touchstart handler from calling preventDefault
+        // when the user taps a button/link, which would block the click on mobile.
+        document.querySelectorAll(".portfolio-btn").forEach(function (btn) {
+          btn.addEventListener("touchstart", function (e) {
+            e.stopPropagation();
+          }, { passive: true });
+        });
       })();
     </script>
   </body>
