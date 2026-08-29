@@ -702,7 +702,8 @@
 
       .portfolio-card {
         position: relative;
-        flex: 0 0 80vw;
+        /* Desktop: 3 cards fill the 1000px container (minus padding + 2 gaps) */
+        flex: 0 0 calc((min(100vw, 1000px) - 2rem - 2.5rem) / 3);
         display: flex;
         flex-direction: column;
         align-items: stretch;
@@ -715,6 +716,12 @@
         transition:
           transform 0.2s ease,
           box-shadow 0.2s ease;
+      }
+
+      @media (max-width: 768px) {
+        .portfolio-card {
+          flex-basis: 80vw;
+        }
       }
 
       .portfolio-card h3 {
