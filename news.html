@@ -24,7 +24,7 @@
         color-scheme: light dark;
       }
 
-      /* Running news ticker — The Neuron + Hard Fork */
+      /* Running news ticker — The Neuron + Hard Fork + DeepMind + Technode */
       .news-ticker {
         display: flex;
         align-items: stretch;
@@ -140,6 +140,18 @@
             href: "https://www.nytimes.com/column/hard-fork",
             url: "https://feeds.simplecast.com/6HKOhNgS",
             items: []
+          },
+          {
+            name: "DeepMind",
+            href: "https://deepmind.google/blog/",
+            url: "https://deepmind.google/blog/rss.xml",
+            items: []
+          },
+          {
+            name: "Technode",
+            href: "https://technode.com/tag/ai/",
+            url: "http://technode.com/tag/ai/feed",
+            items: []
           }
         ];
         // Feeds are fetched client-side via rss2json (no CORS header).
@@ -153,9 +165,12 @@
 
         var ticker = document.getElementById("newsTicker");
         var track = document.getElementById("newsTrack");
-        // Show ticker immediately with empty content, sliding right away.
+        var pageLoadedAt = Date.now();
+        var startDelayMs = 10000;
+        var resumeTimer = null;
+        // Appear immediately but keep sliding paused for first 10s.
         ticker.hidden = false;
-        track.style.animationPlayState = "running";
+        track.style.animationPlayState = "paused";
 
         function decode(str) {
           var el = document.createElement("textarea");
@@ -165,22 +180,6 @@
 
         // Build one pass: headlines from all feeds interleaved.
         function buildSequence(frag) {
-          // Source credit at the end of each cycle (only for sources shown).
-          var sources = [];
-          FEEDS.forEach(function (feed) {
-            if (feed.items.length) sources.push(feed);
-          });
-          if (sources.length) {
-            var src = document.createElement("span");
-            src.className = "news-source";
-            src.appendChild(document.createTextNode("Source: "));
-            sources.forEach(function (feed, idx) {
-              if (idx) src.appendChild(document.createTextNode(" | "));
-              src.appendChild(sourceLink(feed.href, feed.name));
-            });
-            frag.appendChild(src);
-          }
-
           // Interleave items from all feeds so they run together.
           var maxLen = 0;
           FEEDS.forEach(function (feed) {
@@ -221,14 +220,7 @@
         function rebuild() {
           if (!totalItems()) return;
           var frag = document.createDocumentFragment();
-          // Leading spacer so content starts entering from right with ~1 char visible.
-          var spacer = document.createElement("span");
-          spacer.setAttribute("aria-hidden", "true");
-          spacer.style.display = "inline-block";
-          spacer.style.minWidth = "calc(100vw - 1ch)";
-          spacer.style.height = "1px";
-          frag.appendChild(spacer);
-          // Two identical halves => translateX(-50%) scrolls seamlessly.
+          // Two identical halves => translateX(-50%) scrolls seamlessly from left.
           buildSequence(frag);
           buildSequence(frag);
           track.innerHTML = "";
@@ -236,13 +228,17 @@
           var units = totalItems();
           track.style.animationDuration = Math.max(units * 6, 30) + "s";
           ticker.hidden = false;
-          track.style.animationPlayState = "running";
-          // Restart animation from the spacer position so slide starts from right.
-          track.style.animation = "none";
-          void track.offsetWidth;
-          track.style.animation = "";
-          track.style.animationDuration = Math.max(units * 6, 30) + "s";
-          track.style.animationPlayState = "running";
+          var elapsed = Date.now() - pageLoadedAt;
+          if (elapsed < startDelayMs) {
+            track.style.animationPlayState = "paused";
+            if (!resumeTimer) {
+              resumeTimer = setTimeout(function () {
+                track.style.animationPlayState = "running";
+              }, startDelayMs - elapsed);
+            }
+          } else {
+            track.style.animationPlayState = "running";
+          }
         }
 
         function loadNews() {
