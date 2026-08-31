@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Berita — Liputan6</title>
+    <title>News — The Neuron</title>
     <link
       rel="stylesheet"
       href="https://fonts.googleapis.com/css?family=Lato:900"
@@ -24,7 +24,7 @@
         color-scheme: light dark;
       }
 
-      /* Running news ticker — RSS source: Liputan6.com */
+      /* Running news ticker — The Neuron + Hard Fork */
       .news-ticker {
         display: flex;
         align-items: stretch;
@@ -152,20 +152,39 @@
 
     <script>
       (function () {
-        var NEWS_FEED = "https://feed.liputan6.com/rss/news";
-        // RSS is fetched client-side via rss2json (the feed sends no CORS header).
-        var NEWS_ENDPOINT =
-          "https://api.rss2json.com/v1/api.json?rss_url=" +
-          encodeURIComponent(NEWS_FEED);
+        var FEEDS = [
+          {
+            name: "The Neuron",
+            href: "https://www.theneuron.ai",
+            url: "https://www.theneuron.ai/feed/",
+            items: []
+          },
+          {
+            name: "Hard Fork",
+            href: "https://www.nytimes.com/column/hard-fork",
+            url: "https://feeds.simplecast.com/6HKOhNgS",
+            items: []
+          }
+        ];
+        // Feeds are fetched client-side via rss2json (no CORS header).
+        function feedEndpoint(url) {
+          return (
+            "https://api.rss2json.com/v1/api.json?rss_url=" +
+            encodeURIComponent(url)
+          );
+        }
         var METALS_ENDPOINT = "https://mcp-dev-knowledge.vercel.app/api/gold";
         var NEWS_REFRESH_MS = 5 * 60 * 1000; // news: refetch every 5 minutes
-        var METALS_REFRESH_MS = 24 * 60 * 60 * 1000; // gold/USD: refetch next day
+        var METALS_REFRESH_MS = 24 * 60 * 60 * 1000; // USD: refetch next day
 
         var ticker = document.getElementById("newsTicker");
         var track = document.getElementById("newsTrack");
-        var state = { news: [], stats: null };
+        var state = { stats: null };
+        // Show ticker immediately with empty content, sliding right away.
+        ticker.hidden = false;
+        track.style.animationPlayState = "running";
         var rupiah = new Intl.NumberFormat("id-ID", {
-          maximumFractionDigits: 0,
+          maximumFractionDigits: 0
         });
 
         function decode(str) {
@@ -189,51 +208,62 @@
           if (!state.stats) return;
           frag.appendChild(
             statLink(
-              "🪙 Emas Rp" + rupiah.format(state.stats.gold) + "/g",
-              "Harga emas per gram dalam IDR — sumber: metals.dev"
-            )
-          );
-          frag.appendChild(
-            statLink(
-              "💵 1 USD Rp" + rupiah.format(state.stats.usd),
-              "Kurs 1 USD ke IDR — sumber: metals.dev"
+              "1 USD Rp" + rupiah.format(state.stats.usd),
+              "Kurs 1 USD ke IDR - sumber: metals.dev"
             )
           );
         }
 
-        // Build one pass: headlines, with gold + USD stats after the 3rd.
+        // Build one pass: headlines from all feeds interleaved, with USD stat mixed in.
         function buildSequence(frag) {
           var statsDone = false;
-          
-          // Source credit at the end of each cycle (only for sources shown).
-          var src = document.createElement("span");
-          src.className = "news-source";
-          src.appendChild(document.createTextNode("Sumber: "));
-          if (state.news.length) {
-            src.appendChild(
-              sourceLink("https://www.liputan6.com", "Liputan6.com")
-            );
-          }
-          if (state.stats) {
-            if (state.news.length) src.appendChild(document.createTextNode(" · "));
-            src.appendChild(sourceLink("https://metals.dev", "metals.dev"));
-          }
-          frag.appendChild(src);
 
-          state.news.forEach(function (item, i) {
-            var a = document.createElement("a");
-            a.className = "news-item";
-            a.href = item.link;
-            a.target = "_blank";
-            a.rel = "noopener";
-            a.textContent = decode(item.title);
-            frag.appendChild(a);
-            if (i % 2 === 0 && state.stats) {
-              appendStats(frag);
-              statsDone = true;
-            }
+          // Source credit at the end of each cycle (only for sources shown).
+          var sources = [];
+          FEEDS.forEach(function (feed) {
+            if (feed.items.length) sources.push(feed);
           });
-          // Fewer than 3 headlines (or none): still show the prices.
+          var hasSources = sources.length > 0 || state.stats;
+          if (hasSources) {
+            var src = document.createElement("span");
+            src.className = "news-source";
+            src.appendChild(document.createTextNode("Sumber: "));
+            sources.forEach(function (feed, idx) {
+              if (idx) src.appendChild(document.createTextNode(" | "));
+              src.appendChild(sourceLink(feed.href, feed.name));
+            });
+            if (state.stats) {
+              if (sources.length) src.appendChild(document.createTextNode(" | "));
+              src.appendChild(sourceLink("https://metals.dev", "metals.dev"));
+            }
+            frag.appendChild(src);
+          }
+
+          // Interleave items from all feeds so they run together.
+          var maxLen = 0;
+          FEEDS.forEach(function (feed) {
+            if (feed.items.length > maxLen) maxLen = feed.items.length;
+          });
+          var shown = 0;
+          for (var i = 0; i < maxLen; i++) {
+            FEEDS.forEach(function (feed) {
+              var item = feed.items[i];
+              if (!item) return;
+              var a = document.createElement("a");
+              a.className = "news-item";
+              a.href = item.link;
+              a.target = "_blank";
+              a.rel = "noopener";
+              a.textContent = decode(item.title);
+              frag.appendChild(a);
+              shown++;
+              if (shown % 3 === 0 && state.stats) {
+                appendStats(frag);
+                statsDone = true;
+              }
+            });
+          }
+          // Few headlines (or none): still show the price.
           if (state.stats && !statsDone) appendStats(frag);
         }
 
@@ -246,33 +276,57 @@
           return a;
         }
 
+        function totalItems() {
+          var n = 0;
+          FEEDS.forEach(function (feed) {
+            n += feed.items.length;
+          });
+          return n;
+        }
+
         function rebuild() {
-          if (!state.news.length && !state.stats) return;
+          if (!totalItems() && !state.stats) return;
           var frag = document.createDocumentFragment();
+          // Leading spacer so content starts entering from right with ~1 char visible.
+          var spacer = document.createElement("span");
+          spacer.setAttribute("aria-hidden", "true");
+          spacer.style.display = "inline-block";
+          spacer.style.minWidth = "calc(100vw - 1ch)";
+          spacer.style.height = "1px";
+          frag.appendChild(spacer);
           // Two identical halves => translateX(-50%) scrolls seamlessly.
           buildSequence(frag);
           buildSequence(frag);
           track.innerHTML = "";
           track.appendChild(frag);
-          var units = state.news.length + (state.stats ? 2 : 0);
+          var units = totalItems() + (state.stats ? 1 : 0);
           track.style.animationDuration = Math.max(units * 6, 30) + "s";
           ticker.hidden = false;
+          track.style.animationPlayState = "running";
+          // Restart animation from the spacer position so slide starts from right.
+          track.style.animation = "none";
+          void track.offsetWidth;
+          track.style.animation = "";
+          track.style.animationDuration = Math.max(units * 6, 30) + "s";
+          track.style.animationPlayState = "running";
         }
 
         function loadNews() {
-          fetch(NEWS_ENDPOINT, { cache: "no-store" })
-            .then(function (r) {
-              return r.json();
-            })
-            .then(function (d) {
-              if (d && d.status === "ok" && d.items) {
-                state.news = d.items;
-                rebuild();
-              }
-            })
-            .catch(function () {
-              /* network/proxy hiccup — keep the last headlines */
-            });
+          FEEDS.forEach(function (feed) {
+            fetch(feedEndpoint(feed.url), { cache: "no-store" })
+              .then(function (r) {
+                return r.json();
+              })
+              .then(function (d) {
+                if (d && d.status === "ok" && d.items) {
+                  feed.items = d.items;
+                  rebuild();
+                }
+              })
+              .catch(function () {
+                /* network/proxy hiccup - keep the last headlines */
+              });
+          });
         }
 
         function loadMetals() {
@@ -281,8 +335,8 @@
               return r.json();
             })
             .then(function (d) {
-              if (d && d.idr_gold_price && d.idr_usd_price ) {
-                state.stats = { gold: d.idr_gold_price, usd: d.idr_usd_price };
+              if (d && d.idr_usd_price) {
+                state.stats = { usd: d.idr_usd_price };
                 rebuild();
               }
             })
