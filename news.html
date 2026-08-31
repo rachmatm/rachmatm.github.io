@@ -209,7 +209,7 @@
           frag.appendChild(
             statLink(
               "1 USD Rp" + rupiah.format(state.stats.usd),
-              "Kurs 1 USD ke IDR - sumber: metals.dev"
+              "Kurs 1 USD ke IDR - source: metals.dev"
             )
           );
         }
@@ -227,7 +227,7 @@
           if (hasSources) {
             var src = document.createElement("span");
             src.className = "news-source";
-            src.appendChild(document.createTextNode("Sumber: "));
+            src.appendChild(document.createTextNode("Source: "));
             sources.forEach(function (feed, idx) {
               if (idx) src.appendChild(document.createTextNode(" | "));
               src.appendChild(sourceLink(feed.href, feed.name));
