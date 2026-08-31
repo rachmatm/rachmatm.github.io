@@ -84,25 +84,6 @@
         font-weight: 900;
       }
 
-      .news-stat {
-        display: inline-flex;
-        align-items: center;
-        margin: 0 6px;
-        padding: 3px 11px;
-        border-radius: 999px;
-        background: #faf6ea;
-        border: 1px solid #efe6cf;
-        color: #1a1a1a;
-        font-size: 12px;
-        font-weight: 700;
-        text-decoration: none;
-        white-space: nowrap;
-      }
-
-      .news-stat:hover {
-        border-color: #d9c98f;
-      }
-
       .news-source {
         display: inline-flex;
         align-items: center;
@@ -130,11 +111,6 @@
         }
         .news-item {
           color: #e8e8e8;
-        }
-        .news-stat {
-          background: #2a2620;
-          border-color: #3a342a;
-          color: #f0ead8;
         }
         .news-source,
         .news-source a {
@@ -173,19 +149,13 @@
             encodeURIComponent(url)
           );
         }
-        var METALS_ENDPOINT = "https://mcp-dev-knowledge.vercel.app/api/gold";
         var NEWS_REFRESH_MS = 5 * 60 * 1000; // news: refetch every 5 minutes
-        var METALS_REFRESH_MS = 24 * 60 * 60 * 1000; // USD: refetch next day
 
         var ticker = document.getElementById("newsTicker");
         var track = document.getElementById("newsTrack");
-        var state = { stats: null };
         // Show ticker immediately with empty content, sliding right away.
         ticker.hidden = false;
         track.style.animationPlayState = "running";
-        var rupiah = new Intl.NumberFormat("id-ID", {
-          maximumFractionDigits: 0
-        });
 
         function decode(str) {
           var el = document.createElement("textarea");
@@ -193,38 +163,14 @@
           return el.value;
         }
 
-        function statLink(text, title) {
-          var a = document.createElement("a");
-          a.className = "news-stat";
-          a.href = "https://metals.dev";
-          a.target = "_blank";
-          a.rel = "noopener";
-          a.title = title;
-          a.textContent = text;
-          return a;
-        }
-
-        function appendStats(frag) {
-          if (!state.stats) return;
-          frag.appendChild(
-            statLink(
-              "1 USD Rp" + rupiah.format(state.stats.usd),
-              "Kurs 1 USD ke IDR - source: metals.dev"
-            )
-          );
-        }
-
-        // Build one pass: headlines from all feeds interleaved, with USD stat mixed in.
+        // Build one pass: headlines from all feeds interleaved.
         function buildSequence(frag) {
-          var statsDone = false;
-
           // Source credit at the end of each cycle (only for sources shown).
           var sources = [];
           FEEDS.forEach(function (feed) {
             if (feed.items.length) sources.push(feed);
           });
-          var hasSources = sources.length > 0 || state.stats;
-          if (hasSources) {
+          if (sources.length) {
             var src = document.createElement("span");
             src.className = "news-source";
             src.appendChild(document.createTextNode("Source: "));
@@ -232,10 +178,6 @@
               if (idx) src.appendChild(document.createTextNode(" | "));
               src.appendChild(sourceLink(feed.href, feed.name));
             });
-            if (state.stats) {
-              if (sources.length) src.appendChild(document.createTextNode(" | "));
-              src.appendChild(sourceLink("https://metals.dev", "metals.dev"));
-            }
             frag.appendChild(src);
           }
 
@@ -244,7 +186,6 @@
           FEEDS.forEach(function (feed) {
             if (feed.items.length > maxLen) maxLen = feed.items.length;
           });
-          var shown = 0;
           for (var i = 0; i < maxLen; i++) {
             FEEDS.forEach(function (feed) {
               var item = feed.items[i];
@@ -256,15 +197,8 @@
               a.rel = "noopener";
               a.textContent = decode(item.title);
               frag.appendChild(a);
-              shown++;
-              if (shown % 3 === 0 && state.stats) {
-                appendStats(frag);
-                statsDone = true;
-              }
             });
           }
-          // Few headlines (or none): still show the price.
-          if (state.stats && !statsDone) appendStats(frag);
         }
 
         function sourceLink(href, text) {
@@ -285,7 +219,7 @@
         }
 
         function rebuild() {
-          if (!totalItems() && !state.stats) return;
+          if (!totalItems()) return;
           var frag = document.createDocumentFragment();
           // Leading spacer so content starts entering from right with ~1 char visible.
           var spacer = document.createElement("span");
@@ -299,7 +233,7 @@
           buildSequence(frag);
           track.innerHTML = "";
           track.appendChild(frag);
-          var units = totalItems() + (state.stats ? 1 : 0);
+          var units = totalItems();
           track.style.animationDuration = Math.max(units * 6, 30) + "s";
           ticker.hidden = false;
           track.style.animationPlayState = "running";
@@ -329,26 +263,8 @@
           });
         }
 
-        function loadMetals() {
-          fetch(METALS_ENDPOINT, { cache: "no-store" })
-            .then(function (r) {
-              return r.json();
-            })
-            .then(function (d) {
-              if (d && d.idr_usd_price) {
-                state.stats = { usd: d.idr_usd_price };
-                rebuild();
-              }
-            })
-            .catch(function () {
-              /* keep the last known prices */
-            });
-        }
-
         loadNews();
-        loadMetals();
         setInterval(loadNews, NEWS_REFRESH_MS);
-        setInterval(loadMetals, METALS_REFRESH_MS);
       })();
     </script>
   </body>
